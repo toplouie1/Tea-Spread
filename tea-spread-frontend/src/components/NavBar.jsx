@@ -1,0 +1,30 @@
+import "../css/NavBar.css";
+import Button from "@mui/material/Button";
+
+function NavBar() {
+	return (
+		<div className="navBar">
+			<div className="logo">
+				<div>Tea Spread</div>
+			</div>
+			<ul className="rightNav">
+				<li>ClassWork</li>
+				<li>Assignments</li>
+				<li>Class Mates</li>
+				<li>
+					<Button
+						variant="contained"
+						size="small"
+						style={{
+							fontSize: "14px",
+						}}
+					>
+						SIGN IN
+					</Button>
+				</li>
+			</ul>
+		</div>
+	);
+}
+
+export default NavBar;

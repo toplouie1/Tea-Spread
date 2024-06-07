@@ -1,0 +1,20 @@
+.navBar {
+	padding-right: 40px;
+	display: flex;
+	justify-content: space-between;
+	height: 80px;
+	align-items: center;
+	background-color: #e1e1e1;
+}
+.logo {
+	margin: 14px;
+}
+
+.rightNav {
+	display: flex;
+}
+.rightNav li {
+	margin: 5px;
+	cursor: pointer;
+	list-style: none;
+}

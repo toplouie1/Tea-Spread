@@ -10,13 +10,14 @@ function NavBar() {
 			<ul className="rightNav">
 				<li>ClassWork</li>
 				<li>Assignments</li>
-				<li>Class Mates</li>
+				<li>Mates</li>
+				<li>Dashboard</li>
 				<li>
 					<Button
 						variant="contained"
 						size="small"
 						style={{
-							fontSize: "14px",
+							fontSize: "16px",
 						}}
 					>
 						SIGN IN

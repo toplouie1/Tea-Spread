@@ -18,11 +18,10 @@ function Home() {
 				</div>
 			</div>
 			<div className="introduction">
-				<h1> Àbout ŤÈĀ </h1>
 				<div className="intro-container">
 					<img
 						alt="homeimg"
-						src="https://media.istockphoto.com/vectors/computer-lab-abstract-concept-vector-illustration-vector-id1353786683?k=20&m=1353786683&s=612x612&w=0&h=qOnTLR1tqTPTsqtZl1wKi6tiuDxF-Le0KRKnuUZ7oBU="
+						src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsb2ZmaWNlNV8zZF9yZW5kZXJfY2hhcmFjdGVyX29mX2FfeW91bmdfYXNpYW5fdGVhY2hlcl9zdF84OTk0MWU2NC1lNDM3LTQ0MTEtOWEyNi01MjcxZDlhMzUwMzNfMS5qcGc.jpg"
 					/>
 					<p>
 						Welcome to TeaSpread, the all-in-one platform designed to streamline

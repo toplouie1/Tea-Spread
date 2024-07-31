@@ -1,11 +1,14 @@
 import "../css/NavBar.css";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 function NavBar() {
 	return (
 		<div className="navBar">
 			<div className="logo">
-				<div>Tea Spread</div>
+				<Link to="/">
+					<div>Tea Spread</div>
+				</Link>
 			</div>
 			<ul className="rightNav">
 				<li>ClassWork</li>
@@ -13,15 +16,17 @@ function NavBar() {
 				<li>Mates</li>
 				<li>Dashboard</li>
 				<li>
-					<Button
-						variant="contained"
-						size="small"
-						style={{
-							fontSize: "16px",
-						}}
-					>
-						SIGN IN
-					</Button>
+					<Link to="/register">
+						<Button
+							variant="contained"
+							size="small"
+							style={{
+								fontSize: "16px",
+							}}
+						>
+							SIGN IN
+						</Button>
+					</Link>
 				</li>
 			</ul>
 		</div>

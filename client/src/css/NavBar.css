@@ -1,27 +1,27 @@
 .navBar {
-	padding-right: 40px;
 	display: flex;
 	justify-content: space-between;
 	height: 80px;
 	align-items: center;
-	background-color: #e1e1e1;
+	border: 1px solid #504e4e;
 }
 .logo {
 	margin: 14px;
 	font-size: 18px;
 }
 .logo div {
-	border: 1px solid #ccc;
+	border: 1px solid #504e4e;
+	padding: 8px;
+	border-radius: 5px;
 }
 
 .rightNav {
 	display: flex;
 	list-style-type: none;
 	padding: 0;
-	margin: 0;
+	margin: 10px;
 }
 .rightNav li {
-	margin: 8px;
 	cursor: pointer;
 	display: flex;
 	justify-content: center;

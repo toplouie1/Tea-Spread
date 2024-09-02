@@ -6,14 +6,12 @@ function Home() {
 			<div className="Hero">
 				<div className="Hero-text">
 					<h1>
-						ŤÈĀ SPREAD <br />
+						TEA SPREAD <br />
 					</h1>
-					<h3>
-						Welcome to Tea Spread, the all-in-one platform designed to
-						streamline classroom management by enabling teachers to assign
-						homework, create quizzes, communicate with students, and grade their
-						work effortlessly.
-					</h3>
+					<img
+						src="https://pictarts.com/04/material/09-school-study/0898-free-image-m.png"
+						className="image"
+					/>
 				</div>
 			</div>
 		</div>

@@ -1,10 +1,35 @@
 const cors = require("cors");
 const express = require("express");
+
+// import passport;
+const passport = require("passport");
+// import session
+const session = require("express-session");
+
 const app = express();
 const usersController = require("./controllers/usersControllers.js");
 app.use(cors());
 
 app.use(express.json());
+
+app.use(
+	session({
+		secret: process.env.SECRET,
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			// httpOnly: true,
+			// sameSite: "none",
+			// secure: true,
+			// maxAge: 1000 * 60 * 60 * 24,
+		},
+	})
+);
+
+// initialize the passport js middleware ;
+app.use(passport.initialize());
+// serialize and desarilize
+app.use(passport.session());
 
 app.use("/users", usersController);
 app.get("/", (req, res) => {

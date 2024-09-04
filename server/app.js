@@ -1,9 +1,6 @@
 const cors = require("cors");
 const express = require("express");
-
-// import passport;
 const passport = require("passport");
-// import session
 const session = require("express-session");
 
 const app = express();

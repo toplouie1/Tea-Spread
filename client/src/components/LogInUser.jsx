@@ -1,7 +1,7 @@
 import axios from "axios";
+import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import React from "react";
 import "../css/LogIn.css";
 import { Link } from "react-router-dom";
 import GeneralShowMessage from "./GeneralShowMessage";
@@ -36,7 +36,6 @@ function LogInUser() {
 				}
 			})
 			.catch((error) => {
-				console.log("failed log in", error);
 				if (error.response && error.response.data) {
 					setOpen(true);
 				}

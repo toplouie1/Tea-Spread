@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -11,12 +12,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-// import AdbIcon from "@mui/icons-material/Adb";
 
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Classes", "Homework", "About", "Banterland"];
 const settings = ["Profile", "Dashboard", "SignUp", "LogIn"];
+const userLoggedInSettings = ["Profile", "Dashboard", "LogOut"];
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -145,25 +146,40 @@ function NavBar() {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							{settings.map((setting) => (
-								<MenuItem
-									key={setting}
-									onClick={() => {
-										if (setting === "SignUp") {
-											console.log("its sign up");
-											navigate("/register");
-										} else if (setting === "LogIn") {
-											console.log("its Loggin In");
-											navigate("/login");
-										}
-										handleCloseUserMenu();
-									}}
-								>
-									<Typography sx={{ textAlign: "center" }}>
-										{setting}
-									</Typography>
-								</MenuItem>
-							))}
+							{!localStorage.getItem("userId")
+								? settings.map((setting) => (
+										<MenuItem
+											key={setting}
+											onClick={() => {
+												if (setting === "SignUp") {
+													navigate("/register");
+												} else if (setting === "LogIn") {
+													navigate("/login");
+												}
+												handleCloseUserMenu();
+											}}
+										>
+											<Typography sx={{ textAlign: "center" }}>
+												{setting}
+											</Typography>
+										</MenuItem>
+								  ))
+								: userLoggedInSettings.map((setting) => (
+										<MenuItem
+											key={setting}
+											onClick={() => {
+												if (setting === "LogOut") {
+													localStorage.clear();
+													navigate("/");
+												}
+												handleCloseUserMenu();
+											}}
+										>
+											<Typography sx={{ textAlign: "center" }}>
+												{setting}
+											</Typography>
+										</MenuItem>
+								  ))}
 						</Menu>
 					</Box>
 				</Toolbar>

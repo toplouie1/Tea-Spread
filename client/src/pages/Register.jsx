@@ -1,7 +1,7 @@
-import Form from "../components/Form";
+import SignUpUser from "../components/SignUp";
 
 function Register() {
-	return <Form />;
+	return <SignUpUser />;
 }
 
 export default Register;

@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
-// import ProtectedRoute from "./components/ProtectedRoute";
 
 import {
 	BrowserRouter as Router,
@@ -12,15 +11,15 @@ import {
 	Navigate,
 } from "react-router-dom";
 
-const LogOut = () => {
-	localStorage.clear();
-	return <Navigate to="/login" />;
-};
+// const LogOut = () => {
+// 	localStorage.clear();
+// 	return <Navigate to="/login" />;
+// };
 
-const RegisterAndLogout = () => {
-	localStorage.clear();
-	return <Register />;
-};
+// const RegisterAndLogout = () => {
+// 	localStorage.clear();
+// 	return <Register />;
+// };
 
 function App() {
 	return (
@@ -30,7 +29,6 @@ function App() {
 				<Routes>
 					<Route path="/" element={<Home />} />
 					<Route path="/Login" element={<Login />} />
-					{/* <Route path="/Logout" element={<Logout />} /> */}
 					<Route path="/register" element={<Register />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>

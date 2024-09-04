@@ -31,20 +31,22 @@ const createUser = async (user) => {
 	}
 };
 
-const authUser = async (user_name, password) => {
+const authUser = async (username, password) => {
 	try {
 		const user = await db.one(
 			"SELECT * FROM users WHERE username=$1",
-			user_name
+			username
 		);
 
 		const match = await bcrypt.compare(password, user.password_hash);
 		if (match) {
 			const userInfo = {
-				uid: user.user_id,
-				user_name: user.username,
+				user_id: user.user_id,
+				username: user.username,
 			};
 			return userInfo;
+		} else {
+			return { error: "Incorrect password" };
 		}
 	} catch (e) {
 		return { error: "Username doesn't exist..." };

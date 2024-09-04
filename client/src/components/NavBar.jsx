@@ -15,8 +15,8 @@ import MenuItem from "@mui/material/MenuItem";
 
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Classes", "Homework", "Blog"];
-const settings = ["Profile", "Dashboard", "Register", "SignUp"];
+const pages = ["Classes", "Homework", "About", "Banterland"];
+const settings = ["Profile", "Dashboard", "SignUp", "LogIn"];
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -151,7 +151,10 @@ function NavBar() {
 									onClick={() => {
 										if (setting === "SignUp") {
 											console.log("its sign up");
-											navigate(`/register`);
+											navigate("/register");
+										} else if (setting === "LogIn") {
+											console.log("its Loggin In");
+											navigate("/login");
 										}
 										handleCloseUserMenu();
 									}}

@@ -5,7 +5,7 @@ import LoadingIndicator from "./LoadingIndicator";
 
 const API = import.meta.env.VITE_API_URL;
 
-function Form({ route, method }) {
+function Form({ method }) {
 	const [user, setUser] = useState({
 		username: "",
 		password: "",

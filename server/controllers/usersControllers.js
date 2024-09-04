@@ -47,15 +47,25 @@ users.post("/sign_up", async (req, res) => {
 });
 
 users.post("/login", passport.authenticate("local"), async (req, res) => {
-	const { user_name, password } = req.body;
-	const userInfo = await authUser(user_name, password);
+	const { username, password_hash } = req.body;
+	console.log("Received body:", req.body);
+
+	if (!username || !password_hash) {
+		return res
+			.status(400)
+			.json({ success: false, error: "Missing username or password" });
+	}
+
 	try {
-		if (!isNaN(userInfo.user_id)) res.json({ success: true, result: userInfo });
-		else res.status(500).json({ success: false, error: userInfo.error });
+		const userInfo = await authUser(username, password_hash);
+
+		if (userInfo.error) {
+			return res.status(400).json({ success: false, error: userInfo.error });
+		}
+
+		res.json({ success: true, result: userInfo });
 	} catch (error) {
-		res
-			.status(500)
-			.json({ success: false, error: "Incorrect Username or Password" });
+		res.status(500).json({ success: false, error: "Internal server error" });
 	}
 });
 

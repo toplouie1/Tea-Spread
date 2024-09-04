@@ -1,0 +1,17 @@
+.sign-up-submit {
+	width: 200px; /* Adjust width if needed */
+	height: 40px; /* Adjust height if needed */
+	margin-bottom: 20px;
+	margin-top: 20px;
+	font-size: 20px; /* Consistent font size */
+	font-weight: bold;
+	color: rgb(226, 226, 226);
+	border-radius: 4px;
+	border: 1px solid rgb(255, 255, 255);
+	background-color: #252525;
+	transition: 0.3s ease-in;
+}
+
+.sign-up-submit:hover {
+	opacity: 0.7;
+}

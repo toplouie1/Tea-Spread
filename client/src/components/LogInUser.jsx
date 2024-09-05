@@ -86,7 +86,7 @@ function LogInUser() {
 			<div className="loginDivider">
 				<div>
 					<form onSubmit={handleSubmit} className="login-form">
-						<h2>LOG IN</h2>
+						<h2>SIGN IN</h2>
 						<input
 							placeholder="Username"
 							type="text"
@@ -102,7 +102,7 @@ function LogInUser() {
 							value={user.password_hash}
 						/>
 
-						<button className="login-submit">Log In</button>
+						<button className="login-submit">Sign In</button>
 						<div>
 							Welcome To Tea Spread ? &nbsp;
 							<Link to="/register">Sign up here !!</Link>

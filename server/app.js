@@ -14,18 +14,10 @@ app.use(
 		secret: process.env.SECRET,
 		resave: false,
 		saveUninitialized: true,
-		cookie: {
-			// httpOnly: true,
-			// sameSite: "none",
-			// secure: true,
-			// maxAge: 1000 * 60 * 60 * 24,
-		},
 	})
 );
 
-// initialize the passport js middleware ;
 app.use(passport.initialize());
-// serialize and desarilize
 app.use(passport.session());
 
 app.use("/users", usersController);

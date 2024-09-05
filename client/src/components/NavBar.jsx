@@ -16,8 +16,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Classes", "Homework", "About", "Banterland"];
-const settings = ["Profile", "Dashboard", "SignUp", "LogIn"];
-const userLoggedInSettings = ["Profile", "Dashboard", "LogOut"];
+const settings = ["Sign Up", "Sign In"];
+const userLoggedInSettings = ["Profile", "Dashboard", "Log Out"];
 
 function NavBar() {
 	const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -151,9 +151,9 @@ function NavBar() {
 										<MenuItem
 											key={setting}
 											onClick={() => {
-												if (setting === "SignUp") {
+												if (setting === "Sign Up") {
 													navigate("/register");
-												} else if (setting === "LogIn") {
+												} else if (setting === "Sign In") {
 													navigate("/login");
 												}
 												handleCloseUserMenu();
@@ -168,7 +168,7 @@ function NavBar() {
 										<MenuItem
 											key={setting}
 											onClick={() => {
-												if (setting === "LogOut") {
+												if (setting === "Log Out") {
 													localStorage.clear();
 													navigate("/");
 												}

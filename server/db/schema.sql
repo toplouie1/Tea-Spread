@@ -34,6 +34,7 @@ CREATE TABLE class_students (
     class_id INTEGER REFERENCES classes(class_id) ON DELETE CASCADE,
     student_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    CONSTRAINT unique_student_class UNIQUE (class_id, student_id)
 );
 
 CREATE TABLE class_teachers (
@@ -41,6 +42,7 @@ CREATE TABLE class_teachers (
     class_id INTEGER REFERENCES classes(class_id) ON DELETE CASCADE,
     teacher_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     assigned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    CONSTRAINT unique_teacher_class UNIQUE (class_id, teacher_id)
 );
 
 CREATE TABLE assignments (

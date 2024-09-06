@@ -1,5 +1,4 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -40,7 +39,7 @@ function NavBar() {
 	};
 
 	return (
-		<AppBar position="static" sx={{ backgroundColor: "#113c30" }}>
+		<AppBar position="static" sx={{ backgroundColor: "#134537" }}>
 			<Container maxWidth="xl">
 				<Toolbar disableGutters>
 					<Typography
@@ -171,6 +170,8 @@ function NavBar() {
 												if (setting === "Log Out") {
 													localStorage.clear();
 													navigate("/");
+												} else if (setting === "Profile") {
+													navigate("/profile");
 												}
 												handleCloseUserMenu();
 											}}

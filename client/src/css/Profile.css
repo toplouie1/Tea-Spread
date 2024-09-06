@@ -1,0 +1,75 @@
+/* CSS for a clean and professional form */
+.profile_form {
+	max-width: 400px;
+	margin: 0 auto;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+	border-radius: 8px;
+	background-color: #fff;
+}
+
+.profile_form div {
+	margin-bottom: 15px;
+}
+
+.profile_label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #333;
+}
+
+.profile_input,
+select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+}
+
+.profile_input:focus,
+select:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.profile_button {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007bff;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.profile_button:hover {
+	background-color: #0056b3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.profile_form {
+		padding: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	.profile_form {
+		padding: 10px;
+	}
+
+	.profile_label {
+		font-size: 14px;
+	}
+
+	.profile_input,
+	select,
+	.profile_button {
+		font-size: 14px;
+		padding: 8px;
+	}
+}

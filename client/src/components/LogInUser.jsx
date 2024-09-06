@@ -27,7 +27,6 @@ function LogInUser() {
 			})
 			.then((res) => {
 				const userInfo = res.data.result;
-				console.log(userInfo, "userinfo");
 				const userId = userInfo.user_id;
 				if (!isNaN(userId)) {
 					localStorage.setItem("userId", `${userId}`);
@@ -55,7 +54,6 @@ function LogInUser() {
 		if (reason === "clickaway") {
 			return;
 		}
-
 		setOpen(false);
 	};
 

@@ -5,38 +5,79 @@ import "../css/Profile.css";
 const API = import.meta.env.VITE_API_URL;
 
 const Profile = () => {
+	const storedProfile = JSON.parse(localStorage.getItem("profile")) || {};
 	const [formData, setFormData] = useState({
-		user_id: Number(localStorage.getItem("userId")) || 0,
-		email: "",
-		first_name: "",
-		last_name: "",
-		role: "student",
+		first_name: storedProfile.first_name || "",
+		last_name: storedProfile.last_name || "",
+		email: storedProfile.email || "",
+		role: storedProfile.role || "student",
 	});
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setFormData({
-			...formData,
-			[name]: value,
+		setFormData((prevData) => {
+			const updatedData = { ...prevData, [name]: value };
+			localStorage.setItem("profile", JSON.stringify(updatedData));
+			return updatedData;
 		});
 	};
 
-	const handleSubmit = (e) => {
+	async function fetchUserProfile(user_id) {
+		try {
+			const response = await axios.get(`${API}/profiles/${user_id}`);
+			if (response.data.success) {
+				localStorage.setItem("profile", JSON.stringify(response.data.result));
+				return true;
+			} else {
+				return false;
+			}
+		} catch (error) {
+			console.error("Error fetching profile:", error);
+			return false;
+		}
+	}
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		axios
-			.post(`${API}/profiles`, formData, {
-				headers: {
-					"Content-Type": "application/json",
-				},
-			})
-			.then((res) => {
-				navigate("/");
-			})
-			.catch((error) => {
-				if (error.response && error.response.data) {
-					console.log(error);
-				}
-			});
+		const userId = localStorage.getItem("userId");
+		const profileExists = await fetchUserProfile(userId);
+
+		if (!profileExists) {
+			axios
+				.post(`${API}/profiles`, formData, {
+					headers: {
+						"Content-Type": "application/json",
+					},
+				})
+				.then((res) => {
+					navigate("/");
+				})
+				.catch((error) => {
+					if (error.response && error.response.data) {
+						console.error("Error during profile creation:", error);
+					}
+				});
+		} else {
+			axios
+				.put(`${API}/profiles/${userId}`, formData, {
+					headers: {
+						"Content-Type": "application/json",
+					},
+				})
+				.then((res) => {
+					if (res.data.success) {
+						localStorage.setItem("profile", JSON.stringify(res.data.result));
+						navigate("/");
+					} else {
+						console.log("Failed to update the profile:", res.data.error);
+					}
+				})
+				.catch((error) => {
+					if (error.response && error.response.data) {
+						console.error("Error during profile update:", error);
+					}
+				});
+		}
 	};
 
 	return (

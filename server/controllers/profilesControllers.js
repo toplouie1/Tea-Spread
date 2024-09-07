@@ -7,6 +7,7 @@ const {
 	createProfile,
 	updateProfile,
 	deleteProfile,
+	getProfileByuserID,
 } = require("../queries/profiles.js");
 
 profiles.get("/", async (req, res) => {
@@ -27,6 +28,21 @@ profiles.get("/:profile_id", async (req, res) => {
 		res
 			.status(500)
 			.json({ success: false, error: `No profile found at ID ${profile_id}` });
+	}
+});
+
+profiles.get("/:user_id", async (req, res) => {
+	const { user_id } = req.params;
+	const profile = await getProfileByuserID(user_id);
+	if (profile && profile.user_id) {
+		res.json({ success: true, result: profile });
+	} else {
+		res
+			.status(500)
+			.json({
+				success: false,
+				error: `No profile found for user ID ${user_id}`,
+			});
 	}
 });
 

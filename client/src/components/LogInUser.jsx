@@ -18,7 +18,6 @@ function LogInUser() {
 	const [open, setOpen] = useState(false);
 
 	const logIn = () => {
-		console.log(user);
 		axios
 			.post(`${API}/users/login`, user, {
 				headers: {
@@ -31,7 +30,7 @@ function LogInUser() {
 				if (!isNaN(userId)) {
 					localStorage.setItem("userId", `${userId}`);
 					localStorage.setItem("userInfo", JSON.stringify(userInfo));
-					navigate("/");
+					navigate("/profile");
 				}
 			})
 			.catch((error) => {

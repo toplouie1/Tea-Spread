@@ -21,6 +21,18 @@ const getOneProfile = async (pid) => {
 	}
 };
 
+const getProfileByuserID = async (uid) => {
+	try {
+		const profile = await db.one(
+			"SELECT * FROM profiles WHERE users_id=$1",
+			uid
+		);
+		return profile;
+	} catch (error) {
+		return error;
+	}
+};
+
 const createProfile = async (profile) => {
 	try {
 		const createdProfile = await db.one(
@@ -69,4 +81,5 @@ module.exports = {
 	createProfile,
 	updateProfile,
 	deleteProfile,
+	getProfileByuserID,
 };

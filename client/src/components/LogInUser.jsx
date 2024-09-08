@@ -17,27 +17,41 @@ function LogInUser() {
 
 	const [open, setOpen] = useState(false);
 
-	const logIn = () => {
-		axios
-			.post(`${API}/users/login`, user, {
+	const logIn = async () => {
+		try {
+			const response = await axios.post(`${API}/users/login`, user, {
 				headers: {
 					"Content-Type": "application/json",
 				},
-			})
-			.then((res) => {
-				const userInfo = res.data.result;
-				const userId = userInfo.user_id;
-				if (!isNaN(userId)) {
-					localStorage.setItem("userId", `${userId}`);
-					localStorage.setItem("userInfo", JSON.stringify(userInfo));
-					navigate("/profile");
-				}
-			})
-			.catch((error) => {
-				if (error.response && error.response.data) {
-					setOpen(true);
-				}
 			});
+
+			const userInfo = response.data.result;
+			const userId = userInfo.user_id;
+
+			const profileExists = await fetchProfileData(userId);
+
+			if (!isNaN(userId) && profileExists) {
+				localStorage.setItem("userId", `${userId}`);
+				localStorage.setItem("userInfo", JSON.stringify(userInfo));
+				navigate("/");
+			} else {
+				localStorage.setItem("userId", `${userId}`);
+				localStorage.setItem("userInfo", JSON.stringify(userInfo));
+				navigate("/profile");
+			}
+		} catch (error) {
+			console.error("Error during login:", error);
+		}
+	};
+
+	const fetchProfileData = async (userId) => {
+		try {
+			const response = await axios.get(`${API}/profiles/${userId}`);
+			return response.data.success;
+		} catch (error) {
+			console.error("Error fetching profile:", error);
+			return false;
+		}
 	};
 
 	const handleChange = (event) => {

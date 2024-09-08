@@ -1,7 +1,7 @@
 /* CSS for a clean and professional form */
 .profile_form {
-	max-width: 400px;
-	margin: 0 auto;
+	max-width: 550px;
+	margin: 20px auto;
 	padding: 20px;
 	box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
 	border-radius: 8px;

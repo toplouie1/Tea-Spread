@@ -37,19 +37,17 @@ profiles.get("/:user_id", async (req, res) => {
 	if (profile && profile.user_id) {
 		res.json({ success: true, result: profile });
 	} else {
-		res
-			.status(500)
-			.json({
-				success: false,
-				error: `No profile found for user ID ${user_id}`,
-			});
+		res.status(500).json({
+			success: false,
+			error: `No profile found for user ID ${user_id}`,
+		});
 	}
 });
 
 profiles.post("/", async (req, res) => {
 	const profileData = req.body;
 	const createdProfile = await createProfile(profileData);
-	if (createdProfile.profile_id) {
+	if (createdProfile.user_id) {
 		res.json({ success: true, result: createdProfile });
 	} else {
 		res.status(500).json({ success: false, error: "Failed to create profile" });

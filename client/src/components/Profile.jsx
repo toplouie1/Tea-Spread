@@ -7,7 +7,7 @@ const API = import.meta.env.VITE_API_URL;
 const Profile = () => {
 	const storedProfile = JSON.parse(localStorage.getItem("profile")) || {};
 	const [formData, setFormData] = useState({
-		user_id: storedProfile.user_id || 0,
+		user_id: localStorage.getItem("userId") || 0,
 		first_name: storedProfile.first_name || "",
 		last_name: storedProfile.last_name || "",
 		email: storedProfile.email || "",
@@ -15,10 +15,9 @@ const Profile = () => {
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [profileExists, setProfileExists] = useState(false);
+	const [profileExists, setProfileExists] = useState(true);
 
 	useEffect(() => {
-		fetchUserProfile();
 		const fetchProfileData = async () => {
 			try {
 				setIsLoading(true);

@@ -15,7 +15,7 @@ const Profile = () => {
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [profileExists, setProfileExists] = useState(true);
+	const [profileExists, setProfileExists] = useState(false);
 
 	useEffect(() => {
 		const fetchProfileData = async () => {

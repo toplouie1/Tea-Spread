@@ -145,13 +145,10 @@ const Classes = () => {
 				</form>
 			</div>
 			<div className="classes-container">
-				{/* Here you'll map through your classes and render them */}
 				<h3>Class List</h3>
 				<ul>
-					{/* Example list item */}
 					<li>Class 1</li>
 					<li>Class 2</li>
-					{/* Replace with dynamic list */}
 				</ul>
 			</div>
 		</div>

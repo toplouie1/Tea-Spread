@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+}
+
+.form-container {
+	flex: 1;
+	margin-right: 20px;
+}
+
+.classes-container {
+	flex: 1;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.profile_form {
+	display: flex;
+	flex-direction: column;
+}
+
+.profile_label,
+.profile_input,
+.profile_button {
+	margin-bottom: 15px;
+}

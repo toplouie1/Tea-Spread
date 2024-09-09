@@ -11,7 +11,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import { useNavigate } from "react-router-dom";
 
 const pages = ["Classes", "Homework", "About", "Banterland"];
@@ -32,6 +31,13 @@ function NavBar() {
 
 	const handleCloseNavMenu = () => {
 		setAnchorElNav(null);
+	};
+
+	const handleClick = (page) => {
+		handleCloseNavMenu();
+		if (page === "Classes") {
+			navigate("/classes");
+		}
 	};
 
 	const handleCloseUserMenu = () => {
@@ -88,7 +94,7 @@ function NavBar() {
 							sx={{ display: { xs: "block", md: "none" } }}
 						>
 							{pages.map((page) => (
-								<MenuItem key={page} onClick={handleCloseNavMenu}>
+								<MenuItem key={page} onClick={() => handleClick(page)}>
 									<Typography sx={{ textAlign: "center" }}>{page}</Typography>
 								</MenuItem>
 							))}
@@ -116,7 +122,7 @@ function NavBar() {
 						{pages.map((page) => (
 							<Button
 								key={page}
-								onClick={handleCloseNavMenu}
+								onClick={() => handleClick(page)}
 								sx={{ my: 2, color: "white", display: "block" }}
 							>
 								{page}

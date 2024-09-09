@@ -25,22 +25,21 @@ CREATE TABLE profiles (
 CREATE TABLE classes (
     class_id SERIAL PRIMARY KEY,
     class_name VARCHAR(100) NOT NULL,
+    class_description TEXT,
+    class_code VARCHAR(20) UNIQUE,
+    start_date DATE,
+    end_date DATE,
+    max_students INTEGER,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE class_students (
-    class_student_id SERIAL PRIMARY KEY,
+CREATE TABLE class_participants (
+    participant_id SERIAL PRIMARY KEY,
     class_id INTEGER REFERENCES classes(class_id) ON DELETE CASCADE,
-    student_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
+    role VARCHAR(50) NOT NULL CHECK (role IN ('student', 'teacher')),
     enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE class_teachers (
-    class_teacher_id SERIAL PRIMARY KEY,
-    class_id INTEGER REFERENCES classes(class_id) ON DELETE CASCADE,
-    teacher_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-    assigned_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE assignments (

@@ -104,6 +104,7 @@ function LogInUser() {
 							id="username"
 							onChange={handleChange}
 							value={user.username}
+							required
 						/>
 						<input
 							placeholder="Password"
@@ -111,6 +112,7 @@ function LogInUser() {
 							id="password_hash"
 							onChange={handleChange}
 							value={user.password_hash}
+							required
 						/>
 
 						<button className="login-submit">Sign In</button>

@@ -54,6 +54,7 @@ function SignUpUser() {
 							value={user.username}
 							onChange={handleTextChange}
 							placeholder="Username"
+							required
 						/>
 						<input
 							className="form-input"
@@ -62,6 +63,7 @@ function SignUpUser() {
 							value={user.password}
 							onChange={handleTextChange}
 							placeholder="Password"
+							required
 						/>
 						{loading && <LoadingIndicator />}
 						<button className="sign-up-submit" type="submit">

@@ -138,7 +138,7 @@ const Profile = () => {
 				</select>
 			</div>
 			<button className="profile_button" type="submit">
-				Submit
+				{profileExists ? "Update" : "Submit"}
 			</button>
 		</form>
 	);

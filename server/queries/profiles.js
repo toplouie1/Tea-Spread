@@ -45,7 +45,7 @@ const createProfile = async (profile) => {
 const updateProfile = async (pid, profile) => {
 	try {
 		const updatedProfile = await db.one(
-			"UPDATE profiles SET email=$1, first_name=$2, last_name=$3, role=$4, updated_at=CURRENT_TIMESTAMP WHERE profile_id=$5 RETURNING *",
+			"UPDATE profiles SET email=$1, first_name=$2, last_name=$3, role=$4, updated_at=CURRENT_TIMESTAMP WHERE user_id=$5 RETURNING *",
 			[profile.email, profile.first_name, profile.last_name, profile.role, pid]
 		);
 		return updatedProfile;

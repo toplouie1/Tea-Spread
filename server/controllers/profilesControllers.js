@@ -25,12 +25,10 @@ profiles.get("/:profile_id", async (req, res) => {
 	if (profile && profile.user_id) {
 		res.json({ success: true, result: profile });
 	} else {
-		res
-			.status(404)
-			.json({
-				success: false,
-				error: `No profile found with ID ${profile_id}`,
-			});
+		res.status(404).json({
+			success: false,
+			error: `No profile found with ID ${profile_id}`,
+		});
 	}
 });
 
@@ -47,7 +45,7 @@ profiles.post("/", async (req, res) => {
 profiles.put("/:profile_id", async (req, res) => {
 	const { profile_id } = req.params;
 	const updatedProfile = await updateProfile(profile_id, req.body);
-	if (updatedProfile.profile_id) {
+	if (updatedProfile.user_id) {
 		res.json({ success: true, result: updatedProfile });
 	} else {
 		res.status(500).json({

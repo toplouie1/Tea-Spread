@@ -16,11 +16,11 @@ const Profile = () => {
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [profileExists, setProfileExists] = useState(
-		localStorage.getItem("profile")?.user_id || false
+		Boolean(localStorage.getItem("profile"))
 	);
+	const [isFormChanged, setIsFormChanged] = useState(false);
 
 	useEffect(() => {
-		console.log(localStorage.getItem("profile"));
 		const fetchProfileData = async () => {
 			try {
 				setIsLoading(true);
@@ -43,6 +43,16 @@ const Profile = () => {
 		fetchProfileData();
 	}, []);
 
+	useEffect(() => {
+		const isChanged =
+			formData?.first_name !== storedProfile?.first_name ||
+			formData?.last_name !== storedProfile?.last_name ||
+			formData?.email !== storedProfile?.email ||
+			formData?.role !== storedProfile?.role;
+
+		setIsFormChanged(isChanged);
+	}, [formData, storedProfile]);
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData((prevData) => {
@@ -56,8 +66,8 @@ const Profile = () => {
 		e.preventDefault();
 		const userId = localStorage.getItem("userId");
 
-		if (!profileExists) {
-			try {
+		try {
+			if (!profileExists) {
 				const response = await axios.post(`${API}/profiles`, formData, {
 					headers: {
 						"Content-Type": "application/json",
@@ -65,31 +75,29 @@ const Profile = () => {
 				});
 				if (response.data.success) {
 					localStorage.setItem("profile", JSON.stringify(response.data.result));
+					setProfileExists(true);
 				} else {
 					console.error("Failed to create the profile:", response.data.error);
 				}
-			} catch (error) {
-				console.error("Error during profile creation:", error);
+			} else {
+				const response = await axios.put(
+					`${API}/profiles/${userId}`,
+					formData,
+					{
+						headers: {
+							"Content-Type": "application/json",
+						},
+					}
+				);
+				if (response.data.success) {
+					localStorage.setItem("profile", JSON.stringify(response.data.result));
+					setProfileExists(true);
+				} else {
+					console.log("Failed to update the profile:", response.data.error);
+				}
 			}
-		} else {
-			axios
-				.put(`${API}/profiles/${userId}`, formData, {
-					headers: {
-						"Content-Type": "application/json",
-					},
-				})
-				.then((res) => {
-					if (res.data.success) {
-						localStorage.setItem("profile", JSON.stringify(res.data.result));
-					} else {
-						console.log("Failed to update the profile:", res.data.error);
-					}
-				})
-				.catch((error) => {
-					if (error.response && error.response.data) {
-						console.error("Error during profile update:", error);
-					}
-				});
+		} catch (error) {
+			console.error("Error during profile submission:", error);
 		}
 	};
 
@@ -140,7 +148,7 @@ const Profile = () => {
 					<option value="teacher">Teacher</option>
 				</select>
 			</div>
-			<button className="profile_button" type="submit">
+			<button className="profile_button" type="submit" disabled={isFormChanged}>
 				{profileExists ? "Update" : "Submit"}
 			</button>
 		</form>

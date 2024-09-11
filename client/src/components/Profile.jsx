@@ -15,9 +15,12 @@ const Profile = () => {
 	});
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [profileExists, setProfileExists] = useState(false);
+	const [profileExists, setProfileExists] = useState(
+		localStorage.getItem("profile")?.user_id || false
+	);
 
 	useEffect(() => {
+		console.log(localStorage.getItem("profile"));
 		const fetchProfileData = async () => {
 			try {
 				setIsLoading(true);

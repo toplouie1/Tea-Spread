@@ -11,12 +11,15 @@ const getAllProfiles = async () => {
 
 const getOneProfile = async (pid) => {
 	try {
-		const profile = await db.one(
-			"SELECT * FROM profiles WHERE profile_id=$1",
-			pid
+		const profile = await db.oneOrNone(
+			`SELECT user_id, email, first_name, last_name, role, created_at, updated_at 
+			FROM profiles 
+			WHERE user_id = $1`,
+			[pid]
 		);
 		return profile;
 	} catch (error) {
+		console.error("Error fetching profile:", error);
 		return error;
 	}
 };

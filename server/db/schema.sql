@@ -12,8 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE profiles (
-    profile_id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
+    user_id INTEGER PRIMARY KEY REFERENCES users(user_id) ON DELETE CASCADE,
     email TEXT,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
@@ -21,6 +20,7 @@ CREATE TABLE profiles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 
 CREATE TABLE classes (
     class_id SERIAL PRIMARY KEY,

@@ -21,12 +21,16 @@ profiles.get("/", async (req, res) => {
 profiles.get("/:profile_id", async (req, res) => {
 	const { profile_id } = req.params;
 	const profile = await getOneProfile(profile_id);
-	if (profile.profile_id) {
+
+	if (profile && profile.user_id) {
 		res.json({ success: true, result: profile });
 	} else {
 		res
-			.status(500)
-			.json({ success: false, error: `No profile found at ID ${profile_id}` });
+			.status(404)
+			.json({
+				success: false,
+				error: `No profile found with ID ${profile_id}`,
+			});
 	}
 });
 

@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["class", "about", "banterland"];
+const pages = ["Class", "About"];
 const settings = ["Sign Up", "Sign In"];
 const userLoggedInSettings = ["Profile", "Dashboard", "Log Out"];
 
@@ -35,7 +35,7 @@ function NavBar() {
 
 	const handleClick = (page) => {
 		handleCloseNavMenu();
-		if (page === "class") {
+		if (page === "Class") {
 			navigate("/classes");
 		}
 	};

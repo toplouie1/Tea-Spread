@@ -47,7 +47,7 @@ const Classes = () => {
 								<input
 									type="text"
 									placeholder="Enter class code"
-									value={classCodes[classItem.class_id] || ""}
+									value=""
 									onChange={(e) => handleInputChange(e, classItem.class_id)}
 									className="class-code-input"
 								/>

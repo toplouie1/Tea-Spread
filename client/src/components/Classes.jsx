@@ -5,14 +5,14 @@ import "../css/Classes.css";
 const API = import.meta.env.VITE_API_URL;
 
 const Classes = () => {
-	const [classes, setClasses] = useState([]); // Initialize as an array
+	const [classes, setClasses] = useState([]);
 
 	useEffect(() => {
 		const fetchClassData = async () => {
 			try {
 				const response = await axios.get(`${API}/classes`);
 				if (response.data.success) {
-					setClasses(response.data.result); // Assuming result is an array
+					setClasses(response.data.result);
 				} else {
 					console.error(response.data.error);
 				}
@@ -42,6 +42,22 @@ const Classes = () => {
 								<strong>End Date:</strong>{" "}
 								{new Date(classItem.end_date).toLocaleDateString()}
 							</p>
+
+							<div className="class-code-container">
+								<input
+									type="text"
+									placeholder="Enter class code"
+									value={classCodes[classItem.class_id] || ""}
+									onChange={(e) => handleInputChange(e, classItem.class_id)}
+									className="class-code-input"
+								/>
+								<button
+									onClick={() => handleJoinClass(classItem.class_id)}
+									className="join-class-button"
+								>
+									Join Class
+								</button>
+							</div>
 						</div>
 					))}
 				</div>

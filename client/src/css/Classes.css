@@ -70,6 +70,41 @@ h3 {
 	font-style: italic;
 }
 
+.class-code-container {
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.class-code-input {
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 16px;
+}
+
+.join-class-button {
+	padding: 10px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	font-size: 16px;
+}
+
+.join-class-button:hover {
+	background-color: #0056b3;
+}
+
+.message {
+	margin-top: 10px;
+	font-size: 14px;
+	color: #ff3b3b;
+}
+
 @media (max-width: 768px) {
 	.class-item h4 {
 		font-size: 22px;

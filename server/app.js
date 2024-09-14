@@ -7,6 +7,7 @@ const app = express();
 const usersController = require("./controllers/usersControllers.js");
 const profilesController = require("./controllers/profilesControllers.js");
 const classController = require("./controllers/classesControllers.js");
+const participantController = require("./controllers/classParticipantController.js");
 app.use(cors());
 
 app.use(express.json());
@@ -25,6 +26,7 @@ app.use(passport.session());
 app.use("/users", usersController);
 app.use("/profiles", profilesController);
 app.use("/classes", classController);
+app.use("/participants", participantController);
 app.get("/", (req, res) => {
 	res.send("Welcome To Tea Spread");
 });

@@ -21,6 +21,18 @@ const getOneParticipant = async (participant_id) => {
 	}
 };
 
+const existingParticipant = async (participantData) => {
+	try {
+		const existingParticipant = await db.oneOrNone(
+			"SELECT * FROM class_participants WHERE user_id=$1 AND class_id=$2",
+			[participantData.user_id, participantData.class_id]
+		);
+		return existingParticipant;
+	} catch (error) {
+		return error;
+	}
+};
+
 const createParticipant = async (participantData) => {
 	try {
 		const createdParticipant = await db.one(
@@ -68,4 +80,5 @@ module.exports = {
 	createParticipant,
 	updateParticipant,
 	deleteParticipant,
+	existingParticipant,
 };

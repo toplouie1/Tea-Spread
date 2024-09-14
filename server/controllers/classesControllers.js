@@ -49,7 +49,6 @@ classes.get("/:class_id", async (req, res) => {
 	}
 });
 
-// Create a new class
 classes.post("/", async (req, res) => {
 	const classData = req.body;
 	try {

@@ -7,6 +7,7 @@ const {
 	createParticipant,
 	updateParticipant,
 	deleteParticipant,
+	existingParticipant,
 } = require("../queries/classParticipant.js");
 
 participants.get("/", async (req, res) => {
@@ -30,7 +31,6 @@ participants.get("/", async (req, res) => {
 
 participants.get("/:participant_id", async (req, res) => {
 	const { participant_id } = req.params;
-
 	try {
 		const participantDetail = await getOneParticipant(participant_id);
 		if (participantDetail) {
@@ -52,16 +52,21 @@ participants.get("/:participant_id", async (req, res) => {
 participants.post("/", async (req, res) => {
 	const participantData = req.body;
 	try {
-		const createdParticipant = await createParticipant(participantData);
-		if (createdParticipant.participant_id) {
-			res.json({ success: true, result: createdParticipant });
-		} else {
-			res
-				.status(500)
-				.json({ success: false, error: "Error creating participant" });
+		const userExist = await existingParticipant(participantData);
+		if (userExist) {
+			return res.status(400).json({
+				success: false,
+				error: `user ${participantData.user_id} is already enrolled in this class.`,
+			});
 		}
+
+		const createdParticipant = await createParticipant(participantData);
+		return res.status(201).json({
+			success: true,
+			result: createdParticipant,
+		});
 	} catch (error) {
-		res.status(500).json({
+		return res.status(500).json({
 			success: false,
 			error: "Server error...",
 		});

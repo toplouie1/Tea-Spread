@@ -90,21 +90,23 @@ const Classes = () => {
 								{new Date(classItem.end_date).toLocaleDateString()}
 							</p>
 
-							<div className="class-code-container">
-								<input
-									type="text"
-									placeholder="Enter class code"
-									value={classCodes[classItem.class_id] || ""}
-									onChange={(e) => handleInputChange(e, classItem.class_id)}
-									className="class-code-input"
-								/>
-								<button
-									onClick={() => handleJoinClass(classItem.class_id)}
-									className="join-class-button"
-								>
-									Join Class
-								</button>
-							</div>
+							{userId && (
+								<div className="class-code-container">
+									<input
+										type="text"
+										placeholder="Enter class code"
+										value={classCodes[classItem.class_id] || ""}
+										onChange={(e) => handleInputChange(e, classItem.class_id)}
+										className="class-code-input"
+									/>
+									<button
+										onClick={() => handleJoinClass(classItem.class_id)}
+										className="join-class-button"
+									>
+										Join Class
+									</button>
+								</div>
+							)}
 						</div>
 					))}
 				</div>

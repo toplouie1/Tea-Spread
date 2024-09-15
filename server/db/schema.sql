@@ -26,7 +26,7 @@ CREATE TABLE classes (
     class_id SERIAL PRIMARY KEY,
     class_name VARCHAR(100) NOT NULL,
     class_description TEXT,
-    class_code VARCHAR(20) UNIQUE,
+    class_code VARCHAR(255) UNIQUE,
     start_date DATE,
     end_date DATE,
     max_students INTEGER,

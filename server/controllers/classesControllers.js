@@ -1,5 +1,6 @@
 const express = require("express");
 const classes = express.Router();
+const bcrypt = require("bcrypt");
 
 const {
 	getAllClasses,
@@ -51,6 +52,8 @@ classes.get("/:class_id", async (req, res) => {
 
 classes.post("/", async (req, res) => {
 	const classData = req.body;
+	const hashedClassCode = await bcrypt.hash(classData.class_code, 10);
+	classData.class_code = hashedClassCode;
 	try {
 		const createdClass = await createClass(classData);
 		if (createdClass.class_id) {

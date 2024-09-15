@@ -1,5 +1,7 @@
 const express = require("express");
 const participants = express.Router();
+const bcrypt = require("bcrypt");
+const db = require("../db/dbConfig.js");
 
 const {
 	getAllParticipants,
@@ -52,11 +54,28 @@ participants.get("/:participant_id", async (req, res) => {
 participants.post("/", async (req, res) => {
 	const participantData = req.body;
 	try {
+		const classData = await db.one(
+			"SELECT class_code FROM classes WHERE class_id = $1",
+			[participantData.class_id]
+		);
+
+		const isClassCodeValid = await bcrypt.compare(
+			participantData.class_code,
+			classData.class_code
+		);
+
+		if (!isClassCodeValid) {
+			return res.status(400).json({
+				success: false,
+				error: "Invalid class code.",
+			});
+		}
+
 		const userExist = await existingParticipant(participantData);
 		if (userExist) {
 			return res.status(400).json({
 				success: false,
-				error: `user ${participantData.user_id} is already enrolled in this class.`,
+				error: `User ${participantData.user_id} is already enrolled in this class.`,
 			});
 		}
 
@@ -66,6 +85,7 @@ participants.post("/", async (req, res) => {
 			result: createdParticipant,
 		});
 	} catch (error) {
+		console.error("Error handling participant:", error);
 		return res.status(500).json({
 			success: false,
 			error: "Server error...",

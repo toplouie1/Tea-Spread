@@ -1,0 +1,62 @@
+.create_class_form {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	font-family: Arial, sans-serif;
+}
+
+.create_class_form div {
+	margin-bottom: 15px;
+}
+
+.class_label {
+	display: block;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.class_input,
+.class_textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+.class_input:focus,
+.class_textarea:focus {
+	outline: none;
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
+}
+
+.class_textarea {
+	height: 100px;
+	resize: none;
+}
+
+.class_button {
+	width: 100%;
+	padding: 10px;
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	font-size: 18px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.class_button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+}
+
+.class_button:not(:disabled):hover {
+	background-color: #0056b3;
+}

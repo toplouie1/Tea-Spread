@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../css/CreateClass.css";
 
 const API = import.meta.env.VITE_API_URL;
@@ -14,6 +15,7 @@ const CreateClass = () => {
 		end_date: "",
 		max_students: "",
 	});
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -33,7 +35,7 @@ const CreateClass = () => {
 				},
 			});
 			if (response.data.success) {
-				Navigate("/classes");
+				navigate("/classes");
 			}
 		} catch (error) {
 			console.error("Error during class creation:", error);

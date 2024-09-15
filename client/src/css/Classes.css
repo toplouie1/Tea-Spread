@@ -99,6 +99,25 @@ h3 {
 	background-color: #0056b3;
 }
 
+.create-class-section {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.create-class-button {
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+.create-class-button:hover {
+	background-color: #45a049;
+}
+
 .message {
 	margin-top: 10px;
 	font-size: 14px;

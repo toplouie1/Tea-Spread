@@ -11,6 +11,7 @@ const Classes = () => {
 	const [userId, setUserId] = useState("");
 
 	let navigate = useNavigate();
+	const isTeacher = localStorage.getItem("role") === "teacher" ? true : false;
 
 	useEffect(() => {
 		const storedUserId = localStorage.getItem("userId") || "";
@@ -70,6 +71,10 @@ const Classes = () => {
 		}
 	};
 
+	const navigateToNewClass = () => {
+		navigate("/newclass");
+	};
+
 	return (
 		<div className="container">
 			<div className="classes-container">
@@ -111,6 +116,13 @@ const Classes = () => {
 					))}
 				</div>
 			</div>
+			{isTeacher && (
+				<div className="create-class-section">
+					<button onClick={navigateToNewClass} className="create-class-button">
+						Create a New Class
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };

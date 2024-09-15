@@ -47,6 +47,7 @@ function LogInUser() {
 	const fetchProfileData = async (userId) => {
 		try {
 			const response = await axios.get(`${API}/profiles/${userId}`);
+			localStorage.setItem("role", response.data.result.role);
 			return response.data.success;
 		} catch (error) {
 			console.error("Error fetching profile:", error);

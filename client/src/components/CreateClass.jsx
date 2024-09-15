@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/CreateClass.css";
 
 const API = import.meta.env.VITE_API_URL;
-const user = localStorage.getItem("userId");
+const profile = localStorage.getItem("role") || "";
 
 const CreateClass = () => {
 	const [formData, setFormData] = useState({
@@ -25,7 +25,7 @@ const CreateClass = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			if (!user) {
+			if (profile !== "teacher") {
 				alert("haha nice try");
 				return;
 			}

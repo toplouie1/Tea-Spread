@@ -7,6 +7,7 @@ const API = import.meta.env.VITE_API_URL;
 
 const Classes = () => {
 	const [classes, setClasses] = useState([]);
+	const [yourClass, setYourClass] = useState([]);
 	const [classCodes, setClassCodes] = useState({});
 	const [userId, setUserId] = useState("");
 
@@ -32,6 +33,8 @@ const Classes = () => {
 			}
 		};
 		fetchClassData();
+
+		// fetch a class that has your user id in the class participents .
 	}, []);
 
 	const handleInputChange = (e, classId) => {

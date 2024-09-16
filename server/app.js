@@ -8,6 +8,8 @@ const usersController = require("./controllers/usersControllers.js");
 const profilesController = require("./controllers/profilesControllers.js");
 const classController = require("./controllers/classesControllers.js");
 const participantController = require("./controllers/classParticipantController.js");
+const userclassController = require("./controllers/yourClasses.js");
+
 app.use(cors());
 
 app.use(express.json());
@@ -27,6 +29,8 @@ app.use("/users", usersController);
 app.use("/profiles", profilesController);
 app.use("/classes", classController);
 app.use("/participants", participantController);
+app.use("/userclass", userclassController);
+
 app.get("/", (req, res) => {
 	res.send("Welcome To Tea Spread");
 });

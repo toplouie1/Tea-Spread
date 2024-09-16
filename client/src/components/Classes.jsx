@@ -7,35 +7,71 @@ const API = import.meta.env.VITE_API_URL;
 
 const Classes = () => {
 	const [classes, setClasses] = useState([]);
-	const [yourClass, setYourClass] = useState([]);
+	const [userClass, setUserClass] = useState([]);
 	const [classCodes, setClassCodes] = useState({});
 	const [userId, setUserId] = useState("");
-
 	let navigate = useNavigate();
-	const isTeacher = localStorage.getItem("role") === "teacher" ? true : false;
+	const isTeacher = localStorage.getItem("role") === "teacher";
 
 	useEffect(() => {
 		const storedUserId = localStorage.getItem("userId") || "";
-		if (storedUserId) setUserId(storedUserId);
+		if (storedUserId) {
+			setUserId(storedUserId);
+		} else {
+			console.log("No userId found in localStorage");
+		}
+	}, []);
+
+	const fetchClassData = async () => {
+		try {
+			const response = await axios.get(`${API}/classes`);
+			if (response.data.success) {
+				setClasses(response.data.result);
+			} else {
+				console.error("Error fetching all classes:", response.data.error);
+			}
+		} catch (error) {
+			console.log("Error fetching classes", error);
+		}
+	};
+
+	const fetchYourClass = async (userId) => {
+		if (!userId) return;
+
+		try {
+			const response = await axios.get(`${API}/userclass/${userId}`);
+			if (response.data.success) {
+				setUserClass(response.data.result);
+			} else {
+				console.error("Error fetching your classes:", response.data.error);
+			}
+		} catch (error) {
+			console.error("Error fetching your classes:", error);
+		}
+	};
+
+	const unregisteredClasses = classes.filter(
+		(classItem) =>
+			!userClass.some(
+				(yourClassItem) => yourClassItem.class_id === classItem.class_id
+			)
+	);
+
+	const userClasses = classes.filter((classItem) =>
+		userClass.some(
+			(yourClassItem) => yourClassItem.class_id === classItem.class_id
+		)
+	);
+
+	useEffect(() => {
+		fetchClassData();
 	}, []);
 
 	useEffect(() => {
-		const fetchClassData = async () => {
-			try {
-				const response = await axios.get(`${API}/classes`);
-				if (response.data.success) {
-					setClasses(response.data.result);
-				} else {
-					console.error(response.data.error);
-				}
-			} catch (error) {
-				console.log("Error fetching classes", error);
-			}
-		};
-		fetchClassData();
-
-		// fetch a class that has your user id in the class participents .
-	}, []);
+		if (userId) {
+			fetchYourClass(userId);
+		}
+	}, [userId]);
 
 	const handleInputChange = (e, classId) => {
 		setClassCodes({
@@ -83,7 +119,7 @@ const Classes = () => {
 			<div className="classes-container">
 				<h3>Active Classes</h3>
 				<div className="class-list">
-					{classes.map((classItem) => (
+					{unregisteredClasses.map((classItem) => (
 						<div key={classItem.class_id} className="class-item">
 							<h4>{classItem.class_name}</h4>
 							<p>
@@ -119,6 +155,29 @@ const Classes = () => {
 					))}
 				</div>
 			</div>
+			{userId && (
+				<div className="classes-container">
+					<h3> Your Classes</h3>
+					<div className="class-list">
+						{userClasses.map((classItem) => (
+							<div key={classItem.class_id} className="class-item">
+								<h4>{classItem.class_name}</h4>
+								<p>
+									<strong>Description:</strong> {classItem.class_description}
+								</p>
+								<p>
+									<strong>Start Date:</strong>{" "}
+									{new Date(classItem.start_date).toLocaleDateString()}
+								</p>
+								<p>
+									<strong>End Date:</strong>{" "}
+									{new Date(classItem.end_date).toLocaleDateString()}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			)}
 			{isTeacher && (
 				<div className="create-class-section">
 					<button onClick={navigateToNewClass} className="create-class-button">

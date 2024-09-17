@@ -101,6 +101,8 @@ const Classes = () => {
 			});
 
 			if (response.data.success) {
+				fetchClassData();
+				fetchYourClass(userId);
 				alert("Successfully joined the class!");
 			} else {
 				alert(response.data.error);

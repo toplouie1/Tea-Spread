@@ -30,15 +30,40 @@ const CreateClass = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			const today = new Date();
+			const startDate = new Date(formData.start_date);
+			const endDate = new Date(formData.end_date);
+
+			today.setHours(0, 0, 0, 0);
+			startDate.setHours(0, 0, 0, 0);
+			endDate.setHours(0, 0, 0, 0);
+
+			if (startDate < today) {
+				alert("The start date cannot be before today.");
+				return;
+			}
+
+			if (endDate < today) {
+				alert("The end date cannot be before today.");
+				return;
+			}
+
+			if (endDate < startDate) {
+				alert("The end date cannot be before the start date.");
+				return;
+			}
+
 			if (profile !== "teacher") {
 				alert("haha nice try");
 				return;
 			}
+
 			const response = await axios.post(`${API}/classes`, formData, {
 				headers: {
 					"Content-Type": "application/json",
 				},
 			});
+
 			if (response.data.success) {
 				navigate("/classes");
 			}

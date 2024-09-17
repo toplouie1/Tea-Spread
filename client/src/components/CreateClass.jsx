@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../css/CreateClass.css";
 
 const API = import.meta.env.VITE_API_URL;
-const profile = localStorage.getItem("role") || "";
 
 const CreateClass = () => {
+	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		class_name: "",
 		class_description: "",
@@ -15,7 +15,12 @@ const CreateClass = () => {
 		end_date: "",
 		max_students: "",
 	});
-	const navigate = useNavigate();
+	const [profile, setProfile] = useState("");
+
+	useEffect(() => {
+		const storedProfile = localStorage.getItem("role") || "";
+		setProfile(storedProfile);
+	}, []);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;

@@ -116,6 +116,29 @@ const Classes = () => {
 
 	return (
 		<div className="container">
+			{userId && (
+				<div className="user-class-container">
+					<h3> {userClass.length > 1 ? "Your Classes" : "Your Class"}</h3>
+					<div className="class-list">
+						{userClasses.map((classItem) => (
+							<div key={classItem.class_id} className="class-item">
+								<h4>{classItem.class_name}</h4>
+								<p>
+									<strong>Description:</strong> {classItem.class_description}
+								</p>
+								<p>
+									<strong>Start Date:</strong>{" "}
+									{new Date(classItem.start_date).toLocaleDateString()}
+								</p>
+								<p>
+									<strong>End Date:</strong>{" "}
+									{new Date(classItem.end_date).toLocaleDateString()}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			)}
 			<div className="classes-container">
 				<h3>Active Classes</h3>
 				<div className="class-list">
@@ -154,37 +177,17 @@ const Classes = () => {
 						</div>
 					))}
 				</div>
-			</div>
-			{userId && (
-				<div className="classes-container">
-					<h3> Your Classes</h3>
-					<div className="class-list">
-						{userClasses.map((classItem) => (
-							<div key={classItem.class_id} className="class-item">
-								<h4>{classItem.class_name}</h4>
-								<p>
-									<strong>Description:</strong> {classItem.class_description}
-								</p>
-								<p>
-									<strong>Start Date:</strong>{" "}
-									{new Date(classItem.start_date).toLocaleDateString()}
-								</p>
-								<p>
-									<strong>End Date:</strong>{" "}
-									{new Date(classItem.end_date).toLocaleDateString()}
-								</p>
-							</div>
-						))}
+				{isTeacher && (
+					<div className="create-class-section">
+						<button
+							onClick={navigateToNewClass}
+							className="create-class-button"
+						>
+							Create a New Class
+						</button>
 					</div>
-				</div>
-			)}
-			{isTeacher && (
-				<div className="create-class-section">
-					<button onClick={navigateToNewClass} className="create-class-button">
-						Create a New Class
-					</button>
-				</div>
-			)}
+				)}
+			</div>
 		</div>
 	);
 };

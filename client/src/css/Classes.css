@@ -2,7 +2,8 @@
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	padding: 20px;
+	gap: 40px;
+	padding: 30px;
 	background: #1b1b1b;
 	min-height: 100vh;
 }
@@ -14,6 +15,7 @@
 	padding: 30px;
 	border-radius: 15px;
 	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+	padding-top: 2em;
 }
 
 h3 {
@@ -31,6 +33,17 @@ h3 {
 	gap: 20px;
 }
 
+.user-class-container {
+	width: 100%;
+	max-width: 600px;
+	text-align: center;
+	margin: 0 auto;
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+	padding-bottom: 40px;
+}
+
 .class-item {
 	background-color: #333;
 	border-radius: 15px;
@@ -39,19 +52,46 @@ h3 {
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
 	overflow: hidden;
 	position: relative;
-	cursor: pointer;
 }
 
 .class-item:hover {
-	transform: translateY(-10px);
+	transform: translateY(-2px);
 	box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
 }
 
 .class-item h4 {
+	position: relative;
+	display: inline-block;
 	font-size: 24px;
 	margin-bottom: 10px;
 	color: #f9f9f9;
 	font-family: "Roboto", sans-serif;
+	text-align: center;
+	text-transform: capitalize;
+	cursor: pointer;
+	transition: color 0.3s ease;
+}
+
+.class-item h4::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 2px;
+	background-color: #f9f9f9;
+	left: 0;
+	bottom: -5px;
+	transform: scaleX(0);
+	transform-origin: bottom right;
+	transition: transform 0.3s ease;
+}
+
+.class-item h4:hover {
+	color: #3498db;
+}
+
+.class-item h4:hover::after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
 }
 
 .class-item p {

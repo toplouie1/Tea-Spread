@@ -11,6 +11,7 @@ const Classes = () => {
 	const [classCodes, setClassCodes] = useState({});
 	const [userId, setUserId] = useState("");
 	let navigate = useNavigate();
+	const today = new Date();
 	const isTeacher = localStorage.getItem("role") === "teacher";
 
 	useEffect(() => {
@@ -54,7 +55,7 @@ const Classes = () => {
 		(classItem) =>
 			!userClass.some(
 				(yourClassItem) => yourClassItem.class_id === classItem.class_id
-			)
+			) && new Date(classItem.end_date) >= today
 	);
 
 	const userClasses = classes.filter((classItem) =>

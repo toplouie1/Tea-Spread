@@ -47,6 +47,7 @@ CREATE TABLE assignments (
     class_id INTEGER REFERENCES classes(class_id) ON DELETE CASCADE,
     title VARCHAR(100) NOT NULL,
     description TEXT,
+    attachments TEXT,
     due_date TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

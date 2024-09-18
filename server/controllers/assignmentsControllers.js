@@ -24,7 +24,7 @@ assignments.get("/", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });
@@ -44,7 +44,7 @@ assignments.get("/class/:class_id", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });
@@ -56,14 +56,15 @@ assignments.post("/", async (req, res) => {
 		if (createdAssignment.assignment_id) {
 			res.json({ success: true, result: createdAssignment });
 		} else {
-			res
-				.status(500)
-				.json({ success: false, error: "Error creating assignment" });
+			res.status(500).json({
+				success: false,
+				error: "Error creating assignment",
+			});
 		}
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });
@@ -88,7 +89,7 @@ assignments.put("/:assignment_id", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });
@@ -109,7 +110,7 @@ assignments.delete("/:assignment_id", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });
@@ -130,7 +131,7 @@ assignments.delete("/class/:class_id", async (req, res) => {
 	} catch (error) {
 		res.status(500).json({
 			success: false,
-			error: "Server error...",
+			error: error.message || "Server error...",
 		});
 	}
 });

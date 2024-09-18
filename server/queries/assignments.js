@@ -24,13 +24,14 @@ const getAssignmentsByClassId = async (class_id) => {
 const updateAssignment = async (assignment_id, assignmentData) => {
 	try {
 		const updatedAssignment = await db.one(
-			"UPDATE assignments SET class_id=$2, title=$3, description=$4, due_date=$5, updated_at=CURRENT_TIMESTAMP WHERE assignment_id=$1 RETURNING *",
+			"UPDATE assignments SET class_id=$2, title=$3, description=$4, due_date=$5, attachments=$6, updated_at=CURRENT_TIMESTAMP WHERE assignment_id=$1 RETURNING *",
 			[
 				assignment_id,
 				assignmentData.class_id,
 				assignmentData.title,
 				assignmentData.description,
 				assignmentData.due_date,
+				assignmentData.attachments,
 			]
 		);
 		return updatedAssignment;
@@ -54,12 +55,13 @@ const deleteAssignment = async (assignment_id) => {
 const createAssignment = async (assignmentData) => {
 	try {
 		const createdAssignment = await db.one(
-			"INSERT INTO assignments (class_id, title, description, due_date) VALUES ($1, $2, $3, $4) RETURNING *",
+			"INSERT INTO assignments (class_id, title, description, due_date, attachments) VALUES ($1, $2, $3, $4, $5) RETURNING *",
 			[
 				assignmentData.class_id,
 				assignmentData.title,
 				assignmentData.description,
 				assignmentData.due_date,
+				assignmentData.attachments,
 			]
 		);
 		return createdAssignment;
@@ -70,7 +72,7 @@ const createAssignment = async (assignmentData) => {
 
 const deleteAssignmentsByClassId = async (class_id) => {
 	try {
-		const deletedAssignments = await db.many(
+		const deletedAssignments = await db.any(
 			"DELETE FROM assignments WHERE class_id=$1 RETURNING *",
 			class_id
 		);

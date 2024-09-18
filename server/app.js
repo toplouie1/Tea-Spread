@@ -9,6 +9,7 @@ const profilesController = require("./controllers/profilesControllers.js");
 const classController = require("./controllers/classesControllers.js");
 const participantController = require("./controllers/classParticipantController.js");
 const userclassController = require("./controllers/yourClasses.js");
+const assignmentController = require("./controllers/assignmentsControllers.js");
 
 app.use(cors());
 
@@ -30,6 +31,7 @@ app.use("/profiles", profilesController);
 app.use("/classes", classController);
 app.use("/participants", participantController);
 app.use("/userclass", userclassController);
+app.use("/assignments", assignmentController);
 
 app.get("/", (req, res) => {
 	res.send("Welcome To Tea Spread");

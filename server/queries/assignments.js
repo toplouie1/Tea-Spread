@@ -1,5 +1,14 @@
 const db = require("../db/dbConfig.js");
 
+const getAllAssignments = async () => {
+	try {
+		const assignments = await db.many("SELECT * FROM assignments");
+		return assignments;
+	} catch (error) {
+		return error;
+	}
+};
+
 const getAssignmentsByClassId = async (class_id) => {
 	try {
 		const assignments = await db.many(
@@ -42,6 +51,23 @@ const deleteAssignment = async (assignment_id) => {
 	}
 };
 
+const createAssignment = async (assignmentData) => {
+	try {
+		const createdAssignment = await db.one(
+			"INSERT INTO assignments (class_id, title, description, due_date) VALUES ($1, $2, $3, $4) RETURNING *",
+			[
+				assignmentData.class_id,
+				assignmentData.title,
+				assignmentData.description,
+				assignmentData.due_date,
+			]
+		);
+		return createdAssignment;
+	} catch (error) {
+		return error;
+	}
+};
+
 const deleteAssignmentsByClassId = async (class_id) => {
 	try {
 		const deletedAssignments = await db.many(
@@ -55,8 +81,10 @@ const deleteAssignmentsByClassId = async (class_id) => {
 };
 
 module.exports = {
+	getAllAssignments,
 	getAssignmentsByClassId,
 	updateAssignment,
 	deleteAssignment,
+	createAssignment,
 	deleteAssignmentsByClassId,
 };

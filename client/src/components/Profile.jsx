@@ -19,6 +19,7 @@ const Profile = () => {
 		Boolean(localStorage.getItem("profile"))
 	);
 	const [isFormChanged, setIsFormChanged] = useState(false);
+	const userId = localStorage.getItem("userId");
 
 	useEffect(() => {
 		const fetchProfileData = async () => {
@@ -112,6 +113,7 @@ const Profile = () => {
 					value={formData.first_name}
 					onChange={handleChange}
 					required
+					disabled={!userId}
 				/>
 			</div>
 			<div>
@@ -123,6 +125,7 @@ const Profile = () => {
 					value={formData.last_name}
 					onChange={handleChange}
 					required
+					disabled={!userId}
 				/>
 			</div>
 			<div>
@@ -133,6 +136,7 @@ const Profile = () => {
 					name="email"
 					value={formData.email}
 					onChange={handleChange}
+					disabled={!userId}
 					required
 				/>
 			</div>
@@ -143,6 +147,7 @@ const Profile = () => {
 					value={formData.role}
 					onChange={handleChange}
 					required
+					disabled={!userId}
 				>
 					<option value="student">Student</option>
 					<option value="teacher">Teacher</option>

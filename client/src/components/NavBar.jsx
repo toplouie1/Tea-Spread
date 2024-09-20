@@ -178,6 +178,8 @@ function NavBar() {
 													navigate("/");
 												} else if (setting === "Profile") {
 													navigate("/profile");
+												} else if (setting === "Dashboard") {
+													navigate("/dashboard");
 												}
 												handleCloseUserMenu();
 											}}

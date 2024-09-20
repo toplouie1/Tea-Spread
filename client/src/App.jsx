@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import Profile from "./components/Profile";
 import Classes from "./components/Classes";
 import CreateClass from "./components/CreateClass";
+import Dashboard from "./components/Dashboard";
 
 import {
 	BrowserRouter as Router,
@@ -26,6 +27,7 @@ function App() {
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/classes" element={<Classes />} />
 					<Route path="/newclass" element={<CreateClass />} />
+					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Router>

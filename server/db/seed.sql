@@ -41,10 +41,10 @@ INSERT INTO assignments (class_id, title, description, attachments, due_date) VA
 ((SELECT class_id FROM classes WHERE class_code = 'P401'), 'Physics Problem Set 1', 'Solve problem set 1 on dynamics.', 'https://example.com/physics_problem_set1.pdf', '2024-09-30 23:59:00'),
 ((SELECT class_id FROM classes WHERE class_code = 'C101'), 'Chemistry Quiz 1', 'Complete the quiz on atomic structure.', 'https://example.com/chemistry_quiz1.pdf', '2024-09-25 23:59:00');
 
-INSERT INTO submissions (assignment_id, student_id, content, grade, feedback) VALUES
-((SELECT assignment_id FROM assignments WHERE title = 'Homework 1'), (SELECT user_id FROM users WHERE username = 'jdoe'), 'Submission content for Homework 1', 95.00, 'Great job!'),
-((SELECT assignment_id FROM assignments WHERE title = 'Homework 1'), (SELECT user_id FROM users WHERE username = 'bwhite'), 'Submission content for Homework 1', 88.00, 'Good effort.'),
-((SELECT assignment_id FROM assignments WHERE title = 'Essay 1'), (SELECT user_id FROM users WHERE username = 'jdoe'), 'Submission content for Essay 1', NULL, NULL),
-((SELECT assignment_id FROM assignments WHERE title = 'Lab Report'), (SELECT user_id FROM users WHERE username = 'bwhite'), 'Submission content for Lab Report', NULL, NULL),
-((SELECT assignment_id FROM assignments WHERE title = 'Physics Problem Set 1'), (SELECT user_id FROM users WHERE username = 'dgreen'), 'Submission content for Physics Problem Set 1', NULL, NULL),
-((SELECT assignment_id FROM assignments WHERE title = 'Chemistry Quiz 1'), (SELECT user_id FROM users WHERE username = 'dgreen'), 'Submission content for Chemistry Quiz 1', NULL, NULL);
+INSERT INTO submissions (assignment_id, student_id, content, grade, feedback, graded_by, status) VALUES
+((SELECT assignment_id FROM assignments WHERE title = 'Homework 1'), (SELECT user_id FROM users WHERE username = 'jdoe'), 'Submission content for Homework 1', 5, 'Great job!', (SELECT user_id FROM users WHERE username = 'teacher1'), 'Graded'),
+((SELECT assignment_id FROM assignments WHERE title = 'Homework 1'), (SELECT user_id FROM users WHERE username = 'bwhite'), 'Submission content for Homework 1', 4, 'Good effort.', (SELECT user_id FROM users WHERE username = 'teacher1'), 'Graded'),
+((SELECT assignment_id FROM assignments WHERE title = 'Essay 1'), (SELECT user_id FROM users WHERE username = 'jdoe'), 'Submission content for Essay 1', NULL, NULL, NULL, 'Pending'),
+((SELECT assignment_id FROM assignments WHERE title = 'Lab Report'), (SELECT user_id FROM users WHERE username = 'bwhite'), 'Submission content for Lab Report', NULL, NULL, NULL, 'Pending'),
+((SELECT assignment_id FROM assignments WHERE title = 'Physics Problem Set 1'), (SELECT user_id FROM users WHERE username = 'dgreen'), 'Submission content for Physics Problem Set 1', NULL, NULL, NULL, 'Pending'),
+((SELECT assignment_id FROM assignments WHERE title = 'Chemistry Quiz 1'), (SELECT user_id FROM users WHERE username = 'dgreen'), 'Submission content for Chemistry Quiz 1', NULL, NULL, NULL, 'Pending');

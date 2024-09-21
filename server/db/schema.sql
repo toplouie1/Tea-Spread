@@ -57,10 +57,11 @@ CREATE TABLE submissions (
     submission_id SERIAL PRIMARY KEY,
     assignment_id INTEGER REFERENCES assignments(assignment_id) ON DELETE CASCADE,
     student_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
-    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    content TEXT,
-    grade DECIMAL(5, 2),
+    submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    content TEXT NOT NULL,
+    grade INTEGER CHECK (grade >= 1 AND grade <= 5),
     feedback TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    graded_at TIMESTAMP,
+    graded_by INTEGER REFERENCES users(user_id),
+    status VARCHAR(20) NOT NULL DEFAULT 'Pending'
 );

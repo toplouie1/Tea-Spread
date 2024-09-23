@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../css/Classes.css";
 import { useNavigate } from "react-router-dom";
+import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
 
 const API = import.meta.env.VITE_API_URL;
 
@@ -23,33 +24,10 @@ const Classes = () => {
 		}
 	}, []);
 
-	const fetchClassData = async () => {
-		try {
-			const response = await axios.get(`${API}/classes`);
-			if (response.data.success) {
-				setClasses(response.data.result);
-			} else {
-				console.error("Error fetching all classes:", response.data.error);
-			}
-		} catch (error) {
-			console.log("Error fetching classes", error);
-		}
-	};
-
-	const fetchYourClass = async (userId) => {
-		if (!userId) return;
-
-		try {
-			const response = await axios.get(`${API}/userclass/${userId}`);
-			if (response.data.success) {
-				setUserClass(response.data.result);
-			} else {
-				console.error("Error fetching your classes:", response.data.error);
-			}
-		} catch (error) {
-			console.error("Error fetching your classes:", error);
-		}
-	};
+	useEffect(() => {
+		fetchClassData(setClasses);
+		fetchYourClass(userId, setUserClass);
+	}, [userId]);
 
 	const unregisteredClasses = classes.filter(
 		(classItem) =>
@@ -121,7 +99,10 @@ const Classes = () => {
 		<div className="container">
 			{userId && (
 				<div className="user-class-container">
-					<h3> {userClass.length > 1 ? "Your Classes" : "Your Class"}</h3>
+					<h3>
+						{" "}
+						{userClass.length > 1 ? "Enrolled Classes" : "Enrolled Class"}
+					</h3>
 					<div className="class-list">
 						{userClasses.map((classItem) => (
 							<div key={classItem.class_id} className="class-item">

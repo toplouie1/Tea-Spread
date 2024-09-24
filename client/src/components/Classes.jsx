@@ -42,16 +42,6 @@ const Classes = () => {
 		)
 	);
 
-	useEffect(() => {
-		fetchClassData();
-	}, []);
-
-	useEffect(() => {
-		if (userId) {
-			fetchYourClass(userId);
-		}
-	}, [userId]);
-
 	const handleInputChange = (e, classId) => {
 		setClassCodes({
 			...classCodes,

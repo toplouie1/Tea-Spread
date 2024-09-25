@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/Dashboard.css";
 import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
+import AssignmentForm from "./CreateAssignment";
 
 const Dashboard = () => {
 	const [selectedClass, setSelectedClass] = useState("");
@@ -51,26 +52,29 @@ const Dashboard = () => {
 			</div>
 
 			<div className="main-content">
-				{/* {selectedClass ? (
+				{selectedClass ? (
 					<>
-						<h2>{selectedClass.name} - Assignments</h2>
+						<h2>{selectedClass.class_name} ~ Assignments</h2>
 						{isTeacher && (
-							<button className="create-assignment-btn">
-								Create New Assignment
-							</button>
+							<>
+								<button className="create-assignment-btn">
+									Create New Assignment
+								</button>
+								<AssignmentForm />
+							</>
 						)}
 						<ul>
-							{selectedClass.assignments.map((assignment) => (
+							{/* {selectedClass.assignments.map((assignment) => (
 								<li key={assignment.id}>
 									<strong>{assignment.title}</strong> (Due: {assignment.dueDate}
 									) - {assignment.status}
 								</li>
-							))}
+							))} */}
 						</ul>
 					</>
 				) : (
-				)} */}
-				<h2>Please select a class to view assignments</h2>
+					<h2>Please select a class to view assignments</h2>
+				)}
 			</div>
 		</div>
 	);

@@ -60,7 +60,7 @@ const AssignmentForm = ({ onSubmit }) => {
 			</div>
 
 			<div className="form-group">
-				<label htmlFor="attachments">Attachments (Link or Text)</label>
+				<label htmlFor="attachments">Attachments</label>
 				<input
 					type="text"
 					id="attachments"
@@ -72,7 +72,7 @@ const AssignmentForm = ({ onSubmit }) => {
 				/>
 			</div>
 
-			<button type="submit">Submit Assignment</button>
+			<button type="submit">Create</button>
 		</form>
 	);
 };

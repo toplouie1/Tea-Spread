@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../css/Dashboard.css";
 import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
-import AssignmentForm from "./CreateAssignment";
+import { Button } from "@mui/material";
+import AssignmentDrawer from "./AssignmentDrawer";
 
 const Dashboard = () => {
 	const [selectedClass, setSelectedClass] = useState("");
@@ -39,30 +40,25 @@ const Dashboard = () => {
 		<div className="dashboard-container">
 			<div className="sidebar">
 				<h2>Your Classes</h2>
-				<ul>
-					{userClasses.map((cls) => (
-						<li
-							key={cls.class_id}
+				{userClasses.map((cls) => (
+					<li>
+						<Button
+							className="dashboard-button"
+							variant="contained"
+							size="large"
 							onClick={() => handleClassSelect(cls.class_id)}
 						>
 							{cls.class_name}
-						</li>
-					))}
-				</ul>
+						</Button>
+					</li>
+				))}
 			</div>
 
 			<div className="main-content">
 				{selectedClass ? (
 					<>
 						<h2>{selectedClass.class_name} ~ Assignments</h2>
-						{isTeacher && (
-							<>
-								<button className="create-assignment-btn">
-									Create New Assignment
-								</button>
-								<AssignmentForm />
-							</>
-						)}
+						{isTeacher && <AssignmentDrawer name={selectedClass.class_name} />}
 						<ul>
 							{/* {selectedClass.assignments.map((assignment) => (
 								<li key={assignment.id}>

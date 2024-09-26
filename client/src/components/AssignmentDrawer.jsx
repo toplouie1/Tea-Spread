@@ -36,7 +36,10 @@ const AssignmentDrawer = ({ selectedClass }) => {
 							<CloseIcon />
 						</IconButton>
 					</div>
-					<AssignmentForm onSubmit={handleSubmit} />
+					<AssignmentForm
+						onSubmit={handleSubmit}
+						selectedClass={selectedClass}
+					/>
 				</div>
 			</Drawer>
 		</div>

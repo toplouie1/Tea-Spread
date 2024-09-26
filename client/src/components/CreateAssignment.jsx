@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "../css/CreateAssignment.css";
 
-const AssignmentForm = ({ onSubmit }) => {
+const AssignmentForm = ({ onSubmit, selectedClass }) => {
 	const [assignmentData, setAssignmentData] = useState({
 		title: "",
 		description: "",
 		due_date: "",
 		attachments: "",
 	});
+
+	const API = import.meta.env.VITE_API_URL;
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -17,9 +20,34 @@ const AssignmentForm = ({ onSubmit }) => {
 		}));
 	};
 
+	const createAssignment = async () => {
+		try {
+			const response = await axios.post(
+				`${API}/assignments`,
+				{
+					class_id: selectedClass.class_id,
+					...assignmentData,
+				},
+				{
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			if (response.data.success) {
+				alert("Assignment created successfully!");
+			} else {
+				alert("Failed to create assignment.");
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		onSubmit(assignmentData);
+		createAssignment();
 	};
 
 	return (

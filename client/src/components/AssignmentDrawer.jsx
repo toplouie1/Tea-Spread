@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AssignmentForm from "./CreateAssignment";
 import "../css/CreateAssignment.css";
 
-const AssignmentDrawer = ({ name }) => {
+const AssignmentDrawer = ({ selectedClass }) => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const toggleDrawer = (open) => (event) => {
@@ -31,7 +31,7 @@ const AssignmentDrawer = ({ name }) => {
 			<Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
 				<div className="drawer-container">
 					<div className="drawer-header">
-						<h2>{name}</h2>
+						<h2>{selectedClass.class_name}</h2>
 						<IconButton onClick={toggleDrawer(false)}>
 							<CloseIcon />
 						</IconButton>

@@ -58,7 +58,7 @@ const Dashboard = () => {
 				{selectedClass ? (
 					<>
 						<h2>{selectedClass.class_name} ~ Assignments</h2>
-						{isTeacher && <AssignmentDrawer name={selectedClass.class_name} />}
+						{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 						<ul>
 							{/* {selectedClass.assignments.map((assignment) => (
 								<li key={assignment.id}>

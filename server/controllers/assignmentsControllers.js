@@ -29,7 +29,7 @@ assignments.get("/", async (req, res) => {
 	}
 });
 
-assignments.get("/class/:class_id", async (req, res) => {
+assignments.get("/:class_id", async (req, res) => {
 	const { class_id } = req.params;
 	try {
 		const assignmentsList = await getAssignmentsByClassId(class_id);

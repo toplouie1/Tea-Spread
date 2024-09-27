@@ -29,3 +29,25 @@ export const fetchYourClass = async (userId, setUserClass) => {
 		console.error("Error fetching your classes:", error);
 	}
 };
+
+export const getClassAssignmnes = async (class_id) => {
+	try {
+		const response = await axios.get(`${API}/assignments/${class_id}`);
+		if (response.data.success) {
+			return response.data.result;
+		} else {
+			console.error("Error fetching your assignment", response.data.error);
+		}
+	} catch (error) {
+		console.log(error, "error getting assignments for the selected class");
+	}
+};
+
+export const isValidUrl = (string) => {
+	try {
+		new URL(string);
+		return true;
+	} catch (err) {
+		return false;
+	}
+};

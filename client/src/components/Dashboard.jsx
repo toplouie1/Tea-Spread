@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/Dashboard.css";
-import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
+import {
+	fetchClassData,
+	fetchYourClass,
+	getClassAssignmnes,
+	isValidUrl,
+} from "./Helper/classesMethod";
 import { Button } from "@mui/material";
 import AssignmentDrawer from "./AssignmentDrawer";
 
@@ -10,6 +15,7 @@ const Dashboard = () => {
 	const [userClass, setUserClass] = useState([]);
 	const [userId, setUserId] = useState("");
 	const isTeacher = localStorage.getItem("role") === "teacher";
+	const [classAssignments, setClassAssignments] = useState([]);
 
 	useEffect(() => {
 		const storedUserId = localStorage.getItem("userId") || "";
@@ -25,9 +31,15 @@ const Dashboard = () => {
 		fetchYourClass(userId, setUserClass);
 	}, [userId]);
 
-	const handleClassSelect = (classId) => {
+	const handleClassSelect = async (classId) => {
 		const selected = classes.find((cls) => cls.class_id === classId);
 		setSelectedClass(selected);
+		try {
+			const assignments = await getClassAssignmnes(classId);
+			setClassAssignments(assignments || []);
+		} catch (error) {
+			console.error("Error fetching class assignments:", error);
+		}
 	};
 
 	const userClasses = classes.filter((classItem) =>
@@ -59,13 +71,36 @@ const Dashboard = () => {
 					<>
 						<h2>{selectedClass.class_name} ~ Assignments</h2>
 						{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
-						<ul>
-							{/* {selectedClass.assignments.map((assignment) => (
-								<li key={assignment.id}>
-									<strong>{assignment.title}</strong> (Due: {assignment.dueDate}
-									) - {assignment.status}
+						<ul className="assignment-list">
+							{classAssignments.map((assignment) => (
+								<li key={assignment.assignment_id} className="assignment-item">
+									<div className="assignment-header">
+										<strong>{assignment.title}</strong>
+										<span className="due-date">
+											Due: {new Date(assignment.due_date).toLocaleDateString()}
+										</span>
+									</div>
+									<p className="assignment-description">
+										{assignment.description}
+									</p>
+									{assignment.attachments && (
+										<div className="assignment-attachments">
+											<strong>Attachments:</strong>{" "}
+											{isValidUrl(assignment.attachments) ? (
+												<a
+													href={assignment.attachments}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
+													{assignment.attachments}
+												</a>
+											) : (
+												<span>{assignment.attachments}</span>
+											)}
+										</div>
+									)}
 								</li>
-							))} */}
+							))}
 						</ul>
 					</>
 				) : (

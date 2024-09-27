@@ -1,176 +1,198 @@
 .dashboard-container {
-	display: grid;
-	grid-template-columns: 250px 1fr;
+	display: flex;
 	min-height: 100vh;
-	background-color: #f4f4f4;
+	background-color: #1b1b1b;
+	padding: 20px;
+	flex-direction: row;
 }
 
 .sidebar {
-	background-color: #333;
+	width: 250px;
+	background-color: #232323;
 	padding: 20px;
-	color: white;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	transition: all 0.3s ease-in-out;
 }
 
 .sidebar h2 {
-	font-size: 1.8rem;
-	margin-bottom: 20px;
-	text-align: center;
-}
-
-.sidebar ul {
-	list-style: none;
-	padding: 0;
+	font-size: 1.5rem;
+	margin-bottom: 16px;
+	color: #ecf0f1;
 }
 
 .sidebar li {
-	padding: 10px;
-	margin-bottom: 1.5em;
-	text-align: center;
-	border-radius: 8px;
-	transition: all 0.3s ease;
 	list-style-type: none;
-	border-bottom: #333;
+	margin-bottom: 12px;
 }
 
-.sidebar li:hover {
-	color: white;
-}
-
-.main-content {
-	padding: 40px;
-	background-color: white;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
-}
-
-.main-content h2 {
-	font-size: 2.5rem;
-	margin-bottom: 20px;
-	text-align: center;
-}
-
-.main-content ul {
+.dashboard-button {
 	width: 100%;
-	max-width: 900px;
-	list-style: none;
-	padding: 0;
-}
-
-.main-content li {
-	padding: 20px;
-	margin-bottom: 15px;
-	background-color: #f8f8f8;
-	border: 2px solid #eaeaea;
-	border-radius: 10px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	transition: all 0.3s ease;
-}
-
-.main-content li:hover {
-	border-color: #1abc9c;
-}
-
-.create-assignment-btn {
-	padding: 12px 24px;
-	margin-bottom: 20px;
-	background-color: #1abc9c;
-	color: white;
-	border: none;
+	background-color: #ecf0f1;
+	color: #2c3e50;
+	font-weight: bold;
+	padding: 10px;
 	border-radius: 8px;
-	font-size: 1.1rem;
-	cursor: pointer;
 	transition: background-color 0.3s ease;
 }
 
-.create-assignment-btn:hover {
-	background-color: #16a085;
+.dashboard-button:hover {
+	background-color: #bdc3c7;
 }
 
-.assignment-info {
-	display: flex;
-	flex-direction: column;
+.main-content {
+	flex-grow: 1;
+	margin-left: 20px;
+	background-color: #ffffff;
+	padding: 30px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.assignment-title {
-	font-weight: bold;
-	font-size: 1.2rem;
+.main-content h2 {
+	font-size: 1.8rem;
 	color: #333;
+	margin-bottom: 20px;
 }
 
-.assignment-due {
-	margin-top: 5px;
-	color: #888;
+.assignment-list {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
-.assignment-status {
+.assignment-item {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	padding: 16px;
+	margin-bottom: 16px;
+	transition: box-shadow 0.3s ease;
+}
+
+.assignment-item:hover {
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.assignment-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.assignment-header strong {
+	font-size: 1.3rem;
+	color: #2c3e50;
+}
+
+.due-date {
+	font-size: 0.9rem;
+	color: #ff6b6b;
+	font-weight: bold;
+}
+
+.assignment-description {
 	font-size: 1rem;
 	color: #555;
-	font-weight: 600;
+	margin-bottom: 8px;
 }
 
-@media screen and (max-width: 768px) {
-	.dashboard-container {
-		grid-template-columns: 1fr;
-	}
+.assignment-attachments {
+	font-size: 0.95rem;
+	color: #2e2d2d;
+	margin-top: 8px;
+}
+.assignment-attachments a {
+	color: #792929;
+}
 
-	.sidebar {
-		display: flex;
-		align-items: center;
+@media (max-width: 1024px) {
+	.dashboard-container {
 		flex-direction: column;
 	}
 
-	.sidebar h2 {
-		font-size: 1.5rem;
+	.sidebar {
+		width: 100%;
+		margin-bottom: 20px;
 	}
 
-	.sidebar ul {
-		display: flex;
-		overflow-x: auto;
-		flex-direction: row;
-		white-space: nowrap;
+	.main-content {
+		margin-left: 0;
 	}
 
-	.sidebar li {
-		flex: 0 0 auto;
-		margin-right: 10px;
-		width: auto;
+	.assignment-item {
+		padding: 12px;
+	}
+
+	.assignment-header strong {
+		font-size: 1.2rem;
+	}
+
+	.due-date {
+		font-size: 0.85rem;
+	}
+
+	.assignment-description,
+	.assignment-attachments {
+		font-size: 0.9rem;
+	}
+}
+
+@media (max-width: 768px) {
+	.dashboard-container {
+		padding: 10px;
 	}
 
 	.main-content {
 		padding: 20px;
 	}
 
-	.main-content h2 {
-		font-size: 1.8rem;
-	}
-
-	.main-content li {
-		padding: 15px;
-		flex-direction: column;
+	.sidebar h2 {
+		font-size: 1.4rem;
 		text-align: center;
 	}
 
-	.create-assignment-btn {
-		padding: 10px 20px;
+	.dashboard-button {
 		font-size: 1rem;
 	}
-}
 
-@media screen and (max-width: 480px) {
 	.main-content h2 {
 		font-size: 1.6rem;
 	}
+}
 
-	.main-content li {
-		padding: 10px;
+@media (max-width: 480px) {
+	.assignment-header {
+		flex-direction: column;
+		align-items: flex-start;
 	}
 
-	.create-assignment-btn {
-		padding: 8px 16px;
+	.due-date {
+		margin-top: 4px;
+	}
+
+	.assignment-header strong {
+		font-size: 1rem;
+	}
+
+	.assignment-description,
+	.assignment-attachments {
+		font-size: 0.85rem;
+	}
+
+	.sidebar {
+		padding: 15px;
+		border-radius: 8px;
+	}
+
+	.dashboard-button {
+		padding: 8px;
 		font-size: 0.9rem;
+	}
+
+	.sidebar h2 {
+		font-size: 1.3rem;
 	}
 }

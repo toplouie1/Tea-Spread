@@ -24,7 +24,11 @@ const AssignmentDrawer = ({ selectedClass }) => {
 
 	return (
 		<div>
-			<Button variant="contained" onClick={toggleDrawer(true)}>
+			<Button
+				variant="contained"
+				style={{ marginBottom: "20px" }}
+				onClick={toggleDrawer(true)}
+			>
 				Create Assignment
 			</Button>
 

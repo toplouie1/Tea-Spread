@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["Class", "About"];
+const pages = ["Class"];
 const settings = ["Sign Up", "Sign In"];
 const userLoggedInSettings = ["Profile", "Dashboard", "Log Out"];
 

@@ -30,7 +30,7 @@ export const fetchYourClass = async (userId, setUserClass) => {
 	}
 };
 
-export const getClassAssignmnes = async (class_id) => {
+export const getClassAssignmnents = async (class_id) => {
 	try {
 		const response = await axios.get(`${API}/assignments/${class_id}`);
 		if (response.data.success) {

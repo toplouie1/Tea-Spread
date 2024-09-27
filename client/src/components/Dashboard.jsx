@@ -3,7 +3,7 @@ import "../css/Dashboard.css";
 import {
 	fetchClassData,
 	fetchYourClass,
-	getClassAssignmnes,
+	getClassAssignmnents,
 	isValidUrl,
 } from "./Helper/classesMethod";
 import { Button } from "@mui/material";
@@ -35,7 +35,7 @@ const Dashboard = () => {
 		const selected = classes.find((cls) => cls.class_id === classId);
 		setSelectedClass(selected);
 		try {
-			const assignments = await getClassAssignmnes(classId);
+			const assignments = await getClassAssignmnents(classId);
 			setClassAssignments(assignments || []);
 		} catch (error) {
 			console.error("Error fetching class assignments:", error);

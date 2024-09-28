@@ -59,6 +59,7 @@ select:focus {
 @media (max-width: 768px) {
 	.profile_form {
 		padding: 15px;
+		max-width: 80%;
 	}
 }
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import LoadingIndicator from "./LoadingIndicator";
-import "../css/LogIn.css";
+import "../css/SignUp.css";
 import { Link } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_URL;

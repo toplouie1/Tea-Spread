@@ -87,7 +87,7 @@ const Classes = () => {
 
 	return (
 		<div className="container">
-			{userId && (
+			{userId && userClasses.length !== 0 && (
 				<div className="user-class-container">
 					<h3>
 						{" "}

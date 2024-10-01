@@ -7,6 +7,7 @@ import {
 	isValidUrl,
 } from "./Helper/classesMethod";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 import AssignmentDrawer from "./AssignmentDrawer";
 
 const Dashboard = () => {
@@ -53,7 +54,7 @@ const Dashboard = () => {
 			<div className="sidebar">
 				<h2>Your Classes</h2>
 				{userClasses.map((cls) => (
-					<li>
+					<li key={cls.class_id}>
 						<Button
 							className="dashboard-button"
 							variant="contained"
@@ -67,7 +68,24 @@ const Dashboard = () => {
 			</div>
 
 			<div className="main-content">
-				{selectedClass ? (
+				{userClasses.length === 0 ? (
+					<>
+						<h2>Please join classes to view Assignments</h2>
+						<Link
+							to="/classes"
+							style={{
+								color: "blue",
+								textDecoration: "underline",
+								cursor: "pointer",
+								filter: "blur(0.5px)",
+							}}
+						>
+							Navigate to Classes
+						</Link>
+					</>
+				) : !selectedClass ? (
+					<h2>Please select a class to view assignments</h2>
+				) : (
 					<>
 						<h2>{selectedClass.class_name} ~ Assignments</h2>
 						{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
@@ -103,8 +121,6 @@ const Dashboard = () => {
 							))}
 						</ul>
 					</>
-				) : (
-					<h2>Please select a class to view assignments</h2>
 				)}
 			</div>
 		</div>

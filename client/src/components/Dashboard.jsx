@@ -103,13 +103,15 @@ const Dashboard = () => {
 							<span className="due-date">
 								{getStatusMessage(assignment.due_date)}
 							</span>
-							<Button
-								className="submit-button"
-								variant="contained"
-								size="small"
-							>
-								Submit
-							</Button>
+							{!isTeacher && (
+								<Button
+									className="submit-button"
+									variant="contained"
+									size="small"
+								>
+									Submit
+								</Button>
+							)}
 						</div>
 					</li>
 				))}

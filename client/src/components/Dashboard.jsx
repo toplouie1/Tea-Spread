@@ -9,6 +9,7 @@ import {
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import AssignmentDrawer from "./AssignmentDrawer";
+import SubmitAssignmentDrawer from "./AssignmentSubmissionDrawer";
 
 const Dashboard = () => {
 	const [selectedClass, setSelectedClass] = useState(null);
@@ -104,13 +105,10 @@ const Dashboard = () => {
 								{getStatusMessage(assignment.due_date)}
 							</span>
 							{!isTeacher && (
-								<Button
-									className="submit-button"
-									variant="contained"
-									size="small"
-								>
-									Submit
-								</Button>
+								<SubmitAssignmentDrawer
+									selectedClass={selectedClass}
+									selectedAssignment={assignment}
+								/>
 							)}
 						</div>
 					</li>

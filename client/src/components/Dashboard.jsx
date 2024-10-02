@@ -99,9 +99,18 @@ const Dashboard = () => {
 						{assignment.attachments && (
 							<AssignmentAttachments attachments={assignment.attachments} />
 						)}
-						<span className="due-date">
-							{getStatusMessage(assignment.due_date)}
-						</span>
+						<div className="assignment-footer">
+							<span className="due-date">
+								{getStatusMessage(assignment.due_date)}
+							</span>
+							<Button
+								className="submit-button"
+								variant="contained"
+								size="small"
+							>
+								Submit
+							</Button>
+						</div>
 					</li>
 				))}
 			</ul>

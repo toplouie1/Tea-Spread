@@ -23,9 +23,11 @@ export const getStatusMessage = (dueDate, currentDate) => {
 	const timeDifference = new Date(dueDate).getTime() - currentDate.getTime();
 	const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
 
+	const dayLabel = Math.abs(dayDifference) === 1 ? "day" : "days";
+
 	if (dayDifference > 0)
-		return `${dayDifference} day(s) left until the due date.`;
-	if (dayDifference < 0) return `${Math.abs(dayDifference)} day(s) late.`;
+		return `${dayDifference} ${dayLabel} left until the due date.`;
+	if (dayDifference < 0) return `${Math.abs(dayDifference)} ${dayLabel} late.`;
 	return "Due today!";
 };
 

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../css/Dashboard.css";
-import {
-	fetchClassData,
-	fetchYourClass,
-	getClassAssignments,
-	isValidUrl,
-} from "./Helper/classesMethod";
+import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import AssignmentDrawer from "./AssignmentDrawer";
-import SubmitAssignmentDrawer from "./AssignmentSubmissionDrawer";
+import {
+	handleClassSelect,
+	getStatusMessage,
+	filterUserClasses,
+	NoClasses,
+	ClassAssignments,
+} from "./Helper/dashboardHelper";
 
 const Dashboard = () => {
 	const [selectedClass, setSelectedClass] = useState(null);
@@ -34,101 +33,7 @@ const Dashboard = () => {
 		fetchYourClass(userId, setUserClass);
 	}, [userId]);
 
-	const handleClassSelect = async (classId) => {
-		const selected = classes.find((cls) => cls.class_id === classId);
-		setSelectedClass(selected);
-		try {
-			const assignments = await getClassAssignments(classId);
-			setClassAssignments(assignments || []);
-		} catch (error) {
-			console.error("Error fetching class assignments:", error);
-		}
-	};
-
-	const getStatusMessage = (dueDate) => {
-		const timeDifference = new Date(dueDate).getTime() - currentDate.getTime();
-		const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-
-		if (dayDifference > 0)
-			return `${dayDifference} day(s) left until the due date.`;
-		if (dayDifference < 0) return `${Math.abs(dayDifference)} day(s) late.`;
-		return "Due today!";
-	};
-
-	const userClasses = classes.filter((classItem) =>
-		userClass.some(
-			(yourClassItem) => yourClassItem.class_id === classItem.class_id
-		)
-	);
-
-	const NoClasses = () => (
-		<>
-			<h2>Please join classes to view assignments</h2>
-			<Link
-				to="/classes"
-				style={{
-					color: "blue",
-					textDecoration: "underline",
-					cursor: "pointer",
-					filter: "blur(0.5px)",
-				}}
-			>
-				Navigate to Classes
-			</Link>
-		</>
-	);
-
-	const ClassAssignments = ({
-		selectedClass,
-		classAssignments,
-		isTeacher,
-		getStatusMessage,
-	}) => (
-		<>
-			<h2>{selectedClass.class_name} ~ Assignments</h2>
-			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
-			<ul className="assignment-list">
-				{classAssignments.map((assignment) => (
-					<li key={assignment.assignment_id} className="assignment-item">
-						<div className="assignment-header">
-							<strong>{assignment.title}</strong>
-							<span className="due-date">
-								Due: {new Date(assignment.due_date).toLocaleDateString()}
-							</span>
-						</div>
-						<p className="assignment-description">{assignment.description}</p>
-						{assignment.attachments && (
-							<AssignmentAttachments attachments={assignment.attachments} />
-						)}
-						<div className="assignment-footer">
-							<span className="due-date">
-								{getStatusMessage(assignment.due_date)}
-							</span>
-							{!isTeacher && (
-								<SubmitAssignmentDrawer
-									selectedClass={selectedClass}
-									selectedAssignment={assignment}
-								/>
-							)}
-						</div>
-					</li>
-				))}
-			</ul>
-		</>
-	);
-
-	const AssignmentAttachments = ({ attachments }) => (
-		<div className="assignment-attachments">
-			<strong>Attachments:</strong>{" "}
-			{isValidUrl(attachments) ? (
-				<a href={attachments} target="_blank" rel="noopener noreferrer">
-					{attachments}
-				</a>
-			) : (
-				<span>{attachments}</span>
-			)}
-		</div>
-	);
+	const userClasses = filterUserClasses(classes, userClass);
 
 	return (
 		<div className="dashboard-container">
@@ -141,7 +46,14 @@ const Dashboard = () => {
 								className="dashboard-button"
 								variant="contained"
 								size="large"
-								onClick={() => handleClassSelect(cls.class_id)}
+								onClick={() =>
+									handleClassSelect(
+										cls.class_id,
+										classes,
+										setSelectedClass,
+										setClassAssignments
+									)
+								}
 							>
 								{cls.class_name}
 							</Button>
@@ -161,6 +73,7 @@ const Dashboard = () => {
 						classAssignments={classAssignments}
 						isTeacher={isTeacher}
 						getStatusMessage={getStatusMessage}
+						currentDate={currentDate}
 					/>
 				)}
 			</div>

@@ -2,6 +2,7 @@ import { getClassAssignments, isValidUrl } from "./classesMethod";
 import { Link } from "react-router-dom";
 import AssignmentDrawer from "../AssignmentDrawer";
 import SubmitAssignmentDrawer from "../AssignmentSubmissionDrawer";
+const currentDate = new Date();
 
 export const handleClassSelect = async (
 	classId,
@@ -73,8 +74,6 @@ export const ClassAssignments = ({
 	selectedClass,
 	classAssignments,
 	isTeacher,
-	getStatusMessage,
-	currentDate,
 }) => (
 	<>
 		<h2>{selectedClass.class_name} ~ Assignments</h2>

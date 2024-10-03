@@ -4,7 +4,6 @@ import { fetchClassData, fetchYourClass } from "./Helper/classesMethod";
 import { Button } from "@mui/material";
 import {
 	handleClassSelect,
-	getStatusMessage,
 	filterUserClasses,
 	NoClasses,
 	ClassAssignments,
@@ -17,7 +16,6 @@ const Dashboard = () => {
 	const [userId, setUserId] = useState("");
 	const [classAssignments, setClassAssignments] = useState([]);
 	const isTeacher = localStorage.getItem("role") === "teacher";
-	const currentDate = new Date();
 
 	useEffect(() => {
 		const storedUserId = localStorage.getItem("userId");
@@ -72,8 +70,6 @@ const Dashboard = () => {
 						selectedClass={selectedClass}
 						classAssignments={classAssignments}
 						isTeacher={isTeacher}
-						getStatusMessage={getStatusMessage}
-						currentDate={currentDate}
 					/>
 				)}
 			</div>

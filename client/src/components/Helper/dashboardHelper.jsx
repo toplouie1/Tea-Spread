@@ -76,7 +76,7 @@ export const ClassAssignments = ({
 	isTeacher,
 }) => (
 	<>
-		<h2>{selectedClass.class_name} ~ Assignments</h2>
+		<h2>-{selectedClass.class_name.toUpperCase()} ~ Assignments</h2>
 		{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 		<ul className="assignment-list">
 			{classAssignments.map((assignment) => (

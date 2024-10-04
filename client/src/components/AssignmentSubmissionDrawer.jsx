@@ -57,6 +57,13 @@ const SubmitAssignmentDrawer = ({ selectedClass, selectedAssignment }) => {
 								required
 							/>
 						</div>
+						<Button
+							variant={content ? "contained" : "outlined"}
+							style={{ marginTop: "20px" }}
+							onClick={handleSubmit}
+						>
+							Submit
+						</Button>
 					</form>
 				</div>
 			</Drawer>

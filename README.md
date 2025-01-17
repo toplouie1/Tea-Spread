@@ -33,3 +33,7 @@ Tea-Spread is a comprehensive web application designed to streamline class manag
    ```bash
    npm start
    ```
+
+![Tea-Spread Home](images/home.png)
+![Tea-Spread Sing-In](images/signin.png)
+![Tea-Spread Assignments](images/assignments.png)

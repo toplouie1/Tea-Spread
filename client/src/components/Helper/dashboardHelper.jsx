@@ -91,7 +91,6 @@ export const ClassAssignments = ({
 			{activeAssignments.length > 0 && (
 				<h2 style={{ textDecoration: "underline" }}>Active Assignments</h2>
 			)}
-			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 			<ul className="assignment-list">
 				{activeAssignments.map((assignment) => (
 					<li key={assignment.assignment_id} className="assignment-item">
@@ -133,7 +132,6 @@ export const ClassAssignments = ({
 			{lateAssignments.length > 0 && (
 				<h2 style={{ textDecoration: "underline" }}>Late Assignments</h2>
 			)}
-			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 
 			<ul className="assignment-list">
 				{lateAssignments.map((assignment) => (
@@ -171,6 +169,8 @@ export const ClassAssignments = ({
 					</li>
 				))}
 			</ul>
+
+			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 		</>
 	);
 };

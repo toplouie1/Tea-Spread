@@ -74,36 +74,83 @@ export const ClassAssignments = ({
 	selectedClass,
 	classAssignments,
 	isTeacher,
-}) => (
-	<>
-		<h2>-{selectedClass.class_name.toUpperCase()} ~ Assignments</h2>
-		{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
-		<ul className="assignment-list">
-			{classAssignments.map((assignment) => (
-				<li key={assignment.assignment_id} className="assignment-item">
-					<div className="assignment-header">
-						<strong>{assignment.title}</strong>
-						<span className="due-date">
-							Due: {new Date(assignment.due_date).toLocaleDateString()}
-						</span>
-					</div>
-					<p className="assignment-description">{assignment.description}</p>
-					{assignment.attachments && (
-						<AssignmentAttachments attachments={assignment.attachments} />
-					)}
-					<div className="assignment-footer">
-						<span className="due-date">
-							{getStatusMessage(assignment.due_date, currentDate)}
-						</span>
-						{!isTeacher && (
-							<SubmitAssignmentDrawer
-								selectedClass={selectedClass}
-								selectedAssignment={assignment}
-							/>
+}) => {
+	const currentDate = new Date();
+
+	const activeAssignments = classAssignments.filter((assignment) => {
+		const dueDate = new Date(assignment.due_date);
+		return dueDate >= currentDate;
+	});
+	const lateAssignments = classAssignments.filter((assignment) => {
+		const dueDate = new Date(assignment.due_date);
+		return dueDate < currentDate;
+	});
+
+	return (
+		<>
+			{activeAssignments.length > 0 && (
+				<h2 style={{ textDecoration: "underline" }}>Active Assignments</h2>
+			)}
+			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
+			<ul className="assignment-list">
+				{activeAssignments.map((assignment) => (
+					<li key={assignment.assignment_id} className="assignment-item">
+						<div className="assignment-header">
+							<strong>{assignment.title}</strong>
+							<span className="due-date">
+								Due: {new Date(assignment.due_date).toLocaleDateString()}
+							</span>
+						</div>
+						<p className="assignment-description">{assignment.description}</p>
+						{assignment.attachments && (
+							<AssignmentAttachments attachments={assignment.attachments} />
 						)}
-					</div>
-				</li>
-			))}
-		</ul>
-	</>
-);
+						<div className="assignment-footer">
+							<span className="due-date">
+								{getStatusMessage(assignment.due_date, currentDate)}
+							</span>
+							{!isTeacher && (
+								<SubmitAssignmentDrawer
+									selectedClass={selectedClass}
+									selectedAssignment={assignment}
+								/>
+							)}
+						</div>
+					</li>
+				))}
+			</ul>
+			{/* late Assignment */}
+
+			{lateAssignments.length > 0 && (
+				<h2 style={{ textDecoration: "underline" }}>Late Assignments</h2>
+			)}
+			<ul className="assignment-list">
+				{lateAssignments.map((assignment) => (
+					<li key={assignment.assignment_id} className="assignment-item">
+						<div className="assignment-header">
+							<strong>{assignment.title}</strong>
+							<span className="due-date">
+								Due: {new Date(assignment.due_date).toLocaleDateString()}
+							</span>
+						</div>
+						<p className="assignment-description">{assignment.description}</p>
+						{assignment.attachments && (
+							<AssignmentAttachments attachments={assignment.attachments} />
+						)}
+						<div className="assignment-footer">
+							<span className="due-date">
+								{getStatusMessage(assignment.due_date, currentDate)}
+							</span>
+							{!isTeacher && (
+								<SubmitAssignmentDrawer
+									selectedClass={selectedClass}
+									selectedAssignment={assignment}
+								/>
+							)}
+						</div>
+					</li>
+				))}
+			</ul>
+		</>
+	);
+};

@@ -91,7 +91,6 @@ export const ClassAssignments = ({
 			{activeAssignments.length > 0 && (
 				<h2 style={{ textDecoration: "underline" }}>Active Assignments</h2>
 			)}
-			{isTeacher && <AssignmentDrawer selectedClass={selectedClass} />}
 			<ul className="assignment-list">
 				{activeAssignments.map((assignment) => (
 					<li key={assignment.assignment_id} className="assignment-item">
@@ -103,24 +102,27 @@ export const ClassAssignments = ({
 						</div>
 						<p className="assignment-description">{assignment.description}</p>
 						{assignment.attachments && (
-							<AssignmentAttachments attachments={assignment.attachments} />
+							<p className="assignment-attachments">
+								<a
+									href={assignment.attachments}
+									target="_blank"
+									rel="noopener noreferrer"
+									style={{ color: "purple" }}
+								>
+									Link to Attachment
+								</a>
+							</p>
 						)}
 						<div className="assignment-footer">
 							<span className="due-date">
 								{getStatusMessage(assignment.due_date, currentDate)}
 							</span>
-							{!isTeacher && (
-								<SubmitAssignmentDrawer
-									selectedClass={selectedClass}
-									selectedAssignment={assignment}
-								/>
-							)}
 						</div>
 					</li>
 				))}
 			</ul>
-			{/* late Assignment */}
 
+			{/* Late Assignments */}
 			{lateAssignments.length > 0 && (
 				<h2 style={{ textDecoration: "underline" }}>Late Assignments</h2>
 			)}
@@ -135,18 +137,21 @@ export const ClassAssignments = ({
 						</div>
 						<p className="assignment-description">{assignment.description}</p>
 						{assignment.attachments && (
-							<AssignmentAttachments attachments={assignment.attachments} />
+							<p className="assignment-attachments">
+								<a
+									href={assignment.attachments}
+									target="_blank"
+									rel="noopener noreferrer"
+									style={{ color: "purple" }}
+								>
+									Link to Attachment
+								</a>
+							</p>
 						)}
 						<div className="assignment-footer">
 							<span className="due-date">
 								{getStatusMessage(assignment.due_date, currentDate)}
 							</span>
-							{!isTeacher && (
-								<SubmitAssignmentDrawer
-									selectedClass={selectedClass}
-									selectedAssignment={assignment}
-								/>
-							)}
 						</div>
 					</li>
 				))}

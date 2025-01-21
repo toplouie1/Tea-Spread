@@ -46,8 +46,8 @@ const AssignmentForm = ({ onSubmit, selectedClass }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		onSubmit(assignmentData);
 		createAssignment();
+		onSubmit(assignmentData);
 	};
 
 	return (

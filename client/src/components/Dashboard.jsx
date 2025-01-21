@@ -69,6 +69,7 @@ const Dashboard = () => {
 					<ClassAssignments
 						selectedClass={selectedClass}
 						classAssignments={classAssignments}
+						setClassAssignments={setClassAssignments}
 						isTeacher={isTeacher}
 					/>
 				)}

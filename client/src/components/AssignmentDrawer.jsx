@@ -4,7 +4,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import AssignmentForm from "./CreateAssignment";
 import "../css/CreateAssignment.css";
 
-const AssignmentDrawer = ({ selectedClass }) => {
+const AssignmentDrawer = ({ selectedClass, setClassAssignments }) => {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const toggleDrawer = (open) => (event) => {
@@ -19,6 +19,11 @@ const AssignmentDrawer = ({ selectedClass }) => {
 
 	const handleSubmit = (assignmentData) => {
 		console.log("Assignment Submitted:", assignmentData);
+		setClassAssignments((prevAssignments) => [
+			...prevAssignments,
+			assignmentData,
+		]);
+
 		setDrawerOpen(false);
 	};
 

@@ -38,7 +38,9 @@ const Classes = () => {
 
 	const userClasses = classes.filter((classItem) =>
 		userClass.some(
-			(yourClassItem) => yourClassItem.class_id === classItem.class_id
+			(yourClassItem) =>
+				yourClassItem.class_id === classItem.class_id &&
+				new Date(classItem.end_date) >= today
 		)
 	);
 

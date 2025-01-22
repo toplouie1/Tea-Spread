@@ -32,9 +32,12 @@ export const getStatusMessage = (dueDate, currentDate) => {
 };
 
 export const filterUserClasses = (classes, userClass) => {
+	const today = new Date();
 	return classes.filter((classItem) =>
 		userClass.some(
-			(yourClassItem) => yourClassItem.class_id === classItem.class_id
+			(yourClassItem) =>
+				yourClassItem.class_id === classItem.class_id &&
+				new Date(classItem.end_date) >= today
 		)
 	);
 };

@@ -60,9 +60,8 @@ CREATE TABLE submissions (
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     content TEXT NOT NULL,
     grade INTEGER CHECK (grade >= 1 AND grade <= 5) NULL,
-    feedback TEXT,
+    feedback TEXT DEFAULT NULL,
     graded_at TIMESTAMP NULL,
     graded_by INTEGER REFERENCES users(user_id) NULL,
     status VARCHAR(20) NOT NULL DEFAULT 'Submitted' CHECK (status IN ('Submitted', 'Graded')),
-    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

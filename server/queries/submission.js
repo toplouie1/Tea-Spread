@@ -23,10 +23,11 @@ const getSubmissionsByStudentId = async (student_id) => {
 
 const createSubmission = async (submissionData) => {
 	const createdSubmission = await db.one(
-		"INSERT INTO submissions (assignment_id, student_id, content, status) VALUES ($1, $2, $3, $4) RETURNING *",
+		"INSERT INTO submissions (assignment_id, student_id, submission_date,  content, status) VALUES ($1, $2, $3, $4, $5) RETURNING *",
 		[
 			submissionData.assignment_id,
 			submissionData.student_id,
+			submissionData.submission_date,
 			submissionData.content,
 			submissionData.status,
 		]
@@ -41,6 +42,7 @@ const updateSubmission = async (submission_id, submissionData) => {
 			submission_id,
 			submissionData.grade,
 			submissionData.feedback,
+			submissionData.graded_at,
 			submissionData.graded_by,
 			submissionData.status,
 		]

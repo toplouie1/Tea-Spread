@@ -59,9 +59,10 @@ CREATE TABLE submissions (
     student_id INTEGER REFERENCES users(user_id) ON DELETE CASCADE,
     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     content TEXT NOT NULL,
-    grade INTEGER CHECK (grade >= 1 AND grade <= 5),
+    grade INTEGER CHECK (grade >= 1 AND grade <= 5) NULL,
     feedback TEXT,
-    graded_at TIMESTAMP,
-    graded_by INTEGER REFERENCES users(user_id),
-    status VARCHAR(20) NOT NULL DEFAULT 'Pending'
+    graded_at TIMESTAMP NULL,
+    graded_by INTEGER REFERENCES users(user_id) NULL,
+    status VARCHAR(20) NOT NULL DEFAULT 'Submitted' CHECK (status IN ('Submitted', 'Graded')),
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
 );
